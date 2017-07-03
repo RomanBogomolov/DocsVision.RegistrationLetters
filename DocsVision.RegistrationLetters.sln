@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocsVision.RegistrationLetters.Api", "DocsVision.RegistrationLetters.Api\DocsVision.RegistrationLetters.Api.csproj", "{192BD975-B326-431E-A2B7-925432B495D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocsVision.RegistrationLetters.Model", "DocsVision.RegistrationLetters.Model\DocsVision.RegistrationLetters.Model.csproj", "{AD9E2308-9A3B-4CD3-9A6B-A2D8F5323892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocsVision.RegistrationLetters.DataAccess", "DocsVision.RegistrationLetters.DataAccess\DocsVision.RegistrationLetters.DataAccess.csproj", "{C6026454-471E-4ED0-BAB9-F7844F25C9DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocsVision.RegistrationLetters.DataAccess.Sql", "DocsVision.RegistrationLetters.DataAccess.Sql\DocsVision.RegistrationLetters.DataAccess.Sql.csproj", "{A921BD22-ECE8-4E59-907A-EC026BEE3937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocsVision.RegistrationLetters.Log", "DocsVision.RegistrationLetters.Log\DocsVision.RegistrationLetters.Log.csproj", "{4D670C87-3BC9-42D1-BB38-19CA0917D5FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocsVision.RegistrationLetters.WinForm", "DocsVision.RegistrationLetters.WinForm\DocsVision.RegistrationLetters.WinForm.csproj", "{68BC9620-FD18-4103-B87F-BB2A8EB82F7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{192BD975-B326-431E-A2B7-925432B495D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192BD975-B326-431E-A2B7-925432B495D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192BD975-B326-431E-A2B7-925432B495D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192BD975-B326-431E-A2B7-925432B495D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9E2308-9A3B-4CD3-9A6B-A2D8F5323892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9E2308-9A3B-4CD3-9A6B-A2D8F5323892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9E2308-9A3B-4CD3-9A6B-A2D8F5323892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9E2308-9A3B-4CD3-9A6B-A2D8F5323892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6026454-471E-4ED0-BAB9-F7844F25C9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6026454-471E-4ED0-BAB9-F7844F25C9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6026454-471E-4ED0-BAB9-F7844F25C9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6026454-471E-4ED0-BAB9-F7844F25C9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A921BD22-ECE8-4E59-907A-EC026BEE3937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A921BD22-ECE8-4E59-907A-EC026BEE3937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A921BD22-ECE8-4E59-907A-EC026BEE3937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A921BD22-ECE8-4E59-907A-EC026BEE3937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D670C87-3BC9-42D1-BB38-19CA0917D5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D670C87-3BC9-42D1-BB38-19CA0917D5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D670C87-3BC9-42D1-BB38-19CA0917D5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D670C87-3BC9-42D1-BB38-19CA0917D5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68BC9620-FD18-4103-B87F-BB2A8EB82F7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68BC9620-FD18-4103-B87F-BB2A8EB82F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68BC9620-FD18-4103-B87F-BB2A8EB82F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68BC9620-FD18-4103-B87F-BB2A8EB82F7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

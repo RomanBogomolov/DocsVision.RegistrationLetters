@@ -1,0 +1,2 @@
+2017-07-02 16:27:45.4941|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: sdkljkjbhdskj недоступен
+2017-07-02 16:27:45.5275|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: sdkljkjbhdskj недоступен.
