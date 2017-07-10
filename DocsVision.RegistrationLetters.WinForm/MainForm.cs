@@ -6,12 +6,6 @@ namespace DocsVision.RegistrationLetters.WinForm
     public partial class MainForm : Form
     {
         public Guid UserId { get; set; }
-        
-        /// <summary>
-        /// Хард код
-        /// </summary>
-        //private readonly Guid _userId = new Guid("737AF1C2-F090-49CC-B7E3-737774D99B7E");
-
         private ServiceClient _client;
         public MainForm(Guid userId)
         {
