@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DocsVision.RegistrationLetters.WinForm
@@ -16,7 +13,7 @@ namespace DocsVision.RegistrationLetters.WinForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new EmailForm());
         }
     }
 }

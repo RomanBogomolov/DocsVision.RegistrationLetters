@@ -44,6 +44,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxMes = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.sendMes = new System.Windows.Forms.Button();
+            this.btn_ReLogin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +60,7 @@
             this.dataGridView.Location = new System.Drawing.Point(12, 57);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.Size = new System.Drawing.Size(625, 183);
+            this.dataGridView.Size = new System.Drawing.Size(648, 183);
             this.dataGridView.TabIndex = 4;
             // 
             // colTheme
@@ -77,7 +79,6 @@
             // 
             this.colDate.HeaderText = "Дата";
             this.colDate.Name = "colDate";
-            this.colDate.Width = 80;
             // 
             // colUrl
             // 
@@ -88,7 +89,7 @@
             // btnGet
             // 
             this.btnGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnGet.Location = new System.Drawing.Point(666, 84);
+            this.btnGet.Location = new System.Drawing.Point(666, 57);
             this.btnGet.Name = "btnGet";
             this.btnGet.Size = new System.Drawing.Size(142, 53);
             this.btnGet.TabIndex = 5;
@@ -109,7 +110,7 @@
             // btnRead
             // 
             this.btnRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRead.Location = new System.Drawing.Point(666, 161);
+            this.btnRead.Location = new System.Drawing.Point(666, 116);
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(142, 57);
             this.btnRead.TabIndex = 7;
@@ -187,11 +188,35 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Отправитель";
             // 
+            // sendMes
+            // 
+            this.sendMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.sendMes.Location = new System.Drawing.Point(666, 183);
+            this.sendMes.Name = "sendMes";
+            this.sendMes.Size = new System.Drawing.Size(142, 57);
+            this.sendMes.TabIndex = 16;
+            this.sendMes.Text = "Отправить";
+            this.sendMes.UseVisualStyleBackColor = true;
+            this.sendMes.Click += new System.EventHandler(this.sendMes_Click);
+            // 
+            // btn_ReLogin
+            // 
+            this.btn_ReLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_ReLogin.Location = new System.Drawing.Point(666, 489);
+            this.btn_ReLogin.Name = "btn_ReLogin";
+            this.btn_ReLogin.Size = new System.Drawing.Size(142, 45);
+            this.btn_ReLogin.TabIndex = 17;
+            this.btn_ReLogin.Text = "Перезайти";
+            this.btn_ReLogin.UseVisualStyleBackColor = true;
+            this.btn_ReLogin.Click += new System.EventHandler(this.btn_ReLogin_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 552);
+            this.Controls.Add(this.btn_ReLogin);
+            this.Controls.Add(this.sendMes);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -204,8 +229,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGet);
             this.Controls.Add(this.dataGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Список сообщений";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -215,10 +244,6 @@
         #endregion
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button btnGet;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTheme;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUrl;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.Label label2;
@@ -229,6 +254,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxMes;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button sendMes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTheme;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUrl;
+        private System.Windows.Forms.Button btn_ReLogin;
     }
 }
 

@@ -62,22 +62,13 @@ namespace DocsVision.RegistrationLetters.WinForm
             throw new ServiceException("Error: {0}", response.StatusCode);
         }
 
-        public Guid SendMessageToUsers(CompositeMessageEmails obj)
+        public void SendMessageToUsers(CompositeMessageEmails obj)
         {
             var response = _client.PostAsJsonAsync("message/send", obj).Result;
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                var result = response.Content.ReadAsAsync<CompositeMessageEmails>().Result;
-                return result.Message.Id;
+                throw new ServiceException("Error: {0}", response.StatusCode);
             }
-            throw new ServiceException("Error: {0}", response.StatusCode);
         }
-
-//        public void DeleteMessages(CompositeUserMessages obj)
-//        {
-//            var response = _client.DeleteAsync("delete").Result;
-//            if (!response.IsSuccessStatusCode)
-//                throw new ServiceException("Error: {0}", response.StatusCode);
-//        }
     }
 }

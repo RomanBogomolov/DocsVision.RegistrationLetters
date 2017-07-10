@@ -1,33 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DocsVision.RegistrationLetters.WinForm
 {
     public partial class MainForm : Form
     {
+        public Guid UserId { get; set; }
+        
         /// <summary>
         /// Хард код
         /// </summary>
-        private readonly Guid _userId = new Guid("737AF1C2-F090-49CC-B7E3-737774D99B7E");
+        //private readonly Guid _userId = new Guid("737AF1C2-F090-49CC-B7E3-737774D99B7E");
 
         private ServiceClient _client;
-        public MainForm()
+        public MainForm(Guid userId)
         {
             InitializeComponent();
-            _client = new ServiceClient("http://localhost:58199/api/", _userId);
+            UserId = userId;
+            _client = new ServiceClient("http://localhost:58199/api/", UserId);
             dataGridView.MultiSelect = false;
             dataGridView.ReadOnly = true;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
-        private void btnGet_Click(object sender, EventArgs e)
+        private void GetData()
         {
             try
             {
@@ -42,6 +38,11 @@ namespace DocsVision.RegistrationLetters.WinForm
             {
                 MessageBox.Show($"Не удалось загрузить сообщение, текст ошибки: {Environment.NewLine}{exception.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnGet_Click(object sender, EventArgs e)
+        {
+            GetData();
         }
 
         private void btnRead_Click(object sender, EventArgs e)
@@ -64,6 +65,25 @@ namespace DocsVision.RegistrationLetters.WinForm
             {
                 MessageBox.Show($"Не удалось загрузить сообщение, текст ошибки: {Environment.NewLine}{exception.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void sendMes_Click(object sender, EventArgs e)
+        {
+            SendMessage sendMes = new SendMessage(UserId);
+            sendMes.ShowDialog(this);
+           
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            GetData();
+        }
+
+        private void btn_ReLogin_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            EmailForm email = new EmailForm();
+            email.ShowDialog();
         }
     }
 }
