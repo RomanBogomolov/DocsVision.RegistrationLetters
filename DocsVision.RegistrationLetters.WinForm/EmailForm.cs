@@ -18,7 +18,11 @@ namespace DocsVision.RegistrationLetters.WinForm
             try
             {
                 var email = textBoxEmail.Text;
+
                 var user = _client.GetUserByEmail(email);
+
+                /*Проверить пользователя на NULL*/
+
                 MainForm mainForm = new MainForm(user.Id);
                 mainForm.Show();
                 this.Hide();

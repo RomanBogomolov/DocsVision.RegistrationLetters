@@ -37,6 +37,11 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
 
             var userMessages = _messageRepository.GetMessages(userId);
 
+            /* 
+             * 
+             * Ошибка. Возможна ситуация, когда у пользователя нет сообщений! 
+             * 
+             */
             if (userMessages == null)
             {
                 Logger.ServiceLog.Warn($"Не удалось загрузить сообщения для пользователя {userId}");
@@ -69,6 +74,9 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
         {
             IList<Guid> userIds = new List<Guid>();
 
+            /* 
+             * Лучше передать сразу массив
+             */
             foreach (var email in obj.Emails)
             {
                 var user = _userRepository.FindByEmail(email);
@@ -100,6 +108,9 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
                 return BadRequest("Пользователь недоступен");
             }
 
+            /* 
+             * Лучше передать сразу массив
+             */
             foreach (var messageId in obj.MessageIds)
             {
                 var message = _messageRepository.GetMessageInfo(messageId);
