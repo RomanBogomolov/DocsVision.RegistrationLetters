@@ -4457,3 +4457,112 @@
 2017-07-10 10:11:20.3907|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: ѕользователь c: sdfsag@sdgew недоступен
 2017-07-10 10:11:20.4413|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: ѕользователь c: sdfsag@sdgew недоступен.
 2017-07-10 10:11:25.1750|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 00:19:41.6788|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessageInfo
+2017-08-29 00:20:03.3993|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.GetMessageInfo|Error message: «начение не может быть неопределенным.
+2017-08-29 00:26:25.0116|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessageInfo
+2017-08-29 00:26:42.1226|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 00:26:42.1566|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Invalid column name 'surname'.
+Invalid column name 'department'.
+Invalid column name 'position'.
+Could not use view or function 'uf_Select_user_info_by_id' because of binding errors.
+2017-08-29 00:26:42.1781|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 00:26:46.4961|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.GetMessageInfo|Error message: Invalid column name 'surname'.
+Invalid column name 'department'.
+Invalid column name 'position'.
+Could not use view or function 'uf_Select_user_info_by_id' because of binding errors.
+2017-08-29 00:29:40.3066|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessageInfo
+2017-08-29 00:29:46.8465|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 00:29:46.8720|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Invalid column name 'surname'.
+Invalid column name 'department'.
+Invalid column name 'position'.
+Could not use view or function 'uf_Select_user_info_by_id' because of binding errors.
+2017-08-29 00:29:46.8971|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 00:31:18.0695|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessageInfo
+2017-08-29 00:31:20.0632|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 00:31:20.0882|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Invalid column name 'surname'.
+Invalid column name 'department'.
+Invalid column name 'position'.
+2017-08-29 00:31:20.1093|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 00:31:20.5380|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.GetMessageInfo|Error message: Invalid column name 'surname'.
+Invalid column name 'department'.
+Invalid column name 'position'.
+2017-08-29 00:31:20.9619|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessageInfo
+2017-08-29 00:32:53.1938|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessageInfo
+2017-08-29 00:32:56.3712|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 00:32:56.3812|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 00:32:56.5066|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessageInfo
+2017-08-29 00:33:05.2334|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.UpdateMessageRead
+2017-08-29 00:33:05.2439|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.UpdateMessageRead
+2017-08-29 02:35:12.9799|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:35:13.0420|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:35:22.1497|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:35:22.1497|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:35:32.3281|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.SendMessage
+2017-08-29 02:36:54.2928|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:36:54.3804|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:36:55.7698|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:36:55.7783|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:36:58.7147|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.SendMessage
+2017-08-29 02:37:38.6450|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.SendMessage|Error message: Violation of PRIMARY KEY constraint 'PK_UserMessage'. Cannot insert duplicate key in object 'dbo.UserMessage'. The duplicate key value is (266a1692-d089-45c9-afbd-bb6b8fbe7300, 14dc4a5a-c85f-4b5b-b8cd-4544fac99622).
+The statement has been terminated.
+2017-08-29 02:39:27.4279|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.SendMessage
+2017-08-29 02:40:32.9513|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:40:32.9618|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:40:34.2874|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:40:34.2874|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:40:38.9780|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.SendMessage
+2017-08-29 02:40:47.0735|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.SendMessage|Error message: Violation of PRIMARY KEY constraint 'PK_UserMessage'. Cannot insert duplicate key in object 'dbo.UserMessage'. The duplicate key value is (266a1692-d089-45c9-afbd-bb6b8fbe7300, b8bb7e2c-4472-40bd-bfff-012b0deac6a3).
+The statement has been terminated.
+2017-08-29 02:57:44.4704|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.SendMessage
+2017-08-29 02:57:50.9695|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:57:50.9785|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:57:52.2326|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindByEmail
+2017-08-29 02:57:52.2411|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindByEmail
+2017-08-29 02:57:53.4858|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.SendMessage
+2017-08-29 02:57:59.5150|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.SendMessage
+2017-08-29 02:58:11.1993|INFO|DocsVision.RegistrationLetters.Log.Logger|ѕользователь 266a1692-d089-45c9-afbd-bb6b8fbe7300 успешно отправил сообщени€ на test1@gmail.com,test@gmail.com
+2017-08-29 05:55:22.8870|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 05:55:22.9696|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
+2017-08-29 05:55:22.9786|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 05:55:54.5680|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:00:03.4746|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:01:03.6861|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
+2017-08-29 06:02:09.1468|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:03:11.0174|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:03:19.8308|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
+2017-08-29 06:04:43.3791|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:04:50.7404|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:06:13.1745|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:06:20.6842|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:16:44.3714|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:16:44.4329|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:18:29.3672|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.CreateFolder
+2017-08-29 06:18:29.4263|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.CreateFolder
+2017-08-29 06:22:19.2252|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:22:24.2534|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:23:17.7381|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.CreateFolder
+2017-08-29 06:23:17.7727|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.CreateFolder
+2017-08-29 06:23:25.4032|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:23:31.1206|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:35:50.2744|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:35:50.3846|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
+2017-08-29 06:35:50.3846|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:35:52.3599|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:35:52.3758|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
+2017-08-29 06:35:52.3758|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:36:32.3412|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:36:32.4490|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
+2017-08-29 06:36:32.4490|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 06:36:44.6465|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:38:37.1946|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:39:08.4780|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:40:13.4909|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 06:40:20.6125|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 07:01:35.7123|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.DeleteFolder
+2017-08-29 07:01:35.8514|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.DeleteFolder
+2017-08-29 07:02:04.8082|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.GetUserFolders
+2017-08-29 07:02:04.8187|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.GetUserFolders
+2017-08-29 07:03:15.1043|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.DeleteFolder
+2017-08-29 07:03:43.0097|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.DeleteFolder
+2017-08-29 07:04:33.5009|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.DeleteFolder
+2017-08-29 07:04:35.2295|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.DeleteFolder

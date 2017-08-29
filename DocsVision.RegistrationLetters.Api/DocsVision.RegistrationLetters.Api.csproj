@@ -119,6 +119,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FolderController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\ApiResourceValidationErrorWrapper.cs" />
@@ -128,6 +129,7 @@
     </Compile>
     <Compile Include="Models\CompositeMessageEmails.cs" />
     <Compile Include="Models\CompositeUserMessages.cs" />
+    <Compile Include="Models\CreateFolderInputModel.cs" />
     <Compile Include="Models\ModelFactory.cs" />
     <Compile Include="Models\Validators\CompositeMessageEmailsValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,7 @@
 
 using DocsVision.RegistrationLetters.Api.Models;
 using DocsVision.RegistrationLetters.Api.Models.Validators;
+using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DocsVision.RegistrationLetters.Api.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(DocsVision.RegistrationLetters.Api.App_Start.NinjectWebCommon), "Stop")]
@@ -82,12 +83,14 @@ namespace DocsVision.RegistrationLetters.Api.App_Start
             var connectionString = ConfigurationManager.ConnectionStrings["MessageDb"].ConnectionString;
             
             /* DAL */
-            kernel.Bind<IUserRepository>().To<UserRepository>().WithConstructorArgument(connectionString);
-            kernel.Bind<IMessageRepository>().To<MessageRepository>().WithConstructorArgument(connectionString);
+            kernel.Inject(new SqlHelper(connectionString));
+            kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IMessageRepository>().To<MessageRepository>();
+            kernel.Bind<IUserFolderRepository>().To<UserFolderRepository>();
             
             /* Validators */
             kernel.Bind<IValidator<Message>>().To<MessageValidator>();
-            kernel.Bind<IValidator<CompositeMessageEmails>>().To<CompositeMessageEmailsValidator>();
+            kernel.Bind<IValidator<MessageEmailsInputModel>>().To<MessageEmailsInputModelValidator>();
         }        
     }
 }

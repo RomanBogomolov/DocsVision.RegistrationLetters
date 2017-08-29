@@ -62,7 +62,7 @@ namespace DocsVision.RegistrationLetters.WinForm
             throw new ServiceException("Error: {0}", response.StatusCode);
         }
 
-        public void SendMessageToUsers(CompositeMessageEmails obj)
+        public void SendMessageToUsers(MessageEmailsInputModel obj)
         {
             var response = _client.PostAsJsonAsync("message/send", obj).Result;
             if (!response.IsSuccessStatusCode)

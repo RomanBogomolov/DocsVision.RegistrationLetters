@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using DocsVision.RegistrationLetters.DataAccess.Sql.Exceptions;
+using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
 using DocsVision.RegistrationLetters.Log;
 using DocsVision.RegistrationLetters.Model;
 using Newtonsoft.Json;
@@ -10,154 +12,151 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
 {
     public class MessageRepository : IMessageRepository
     {
-        private readonly string _connectionString;
         private readonly IUserRepository _userRepository;
 
-        public MessageRepository(string connectionString, IUserRepository userRepository)
+        public MessageRepository(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _connectionString = connectionString;
         }
 
-        public void DeleteMessages(Guid userId, IEnumerable<Guid> messageIds)
-        {
-            using (var logger = new LogWrapper())
-            {
-                if (userId == Guid.Empty)
-                {
-                    logger.Error("Не указан Id сообщения.");
-                    throw new ArgumentNullException(nameof(userId), "Не указан id пользователя");
-                }
-
-                if (messageIds == null)
-                {
-                    logger.Error("Не указаны удаляемые сообщения");
-                    throw new ArgumentNullException(nameof(userId), "Не указаны удаляемые сообщения");
-                }
-
-                try
-                {
-                    using (var connection = new SqlConnection(_connectionString))
-                    {
-                        connection.Open();
-
-                        using (var command = new SqlCommand("up_Delete_user_messages", connection))
-                        {
-                            command.CommandType = CommandType.StoredProcedure;
-
-                            var jsonIds = JsonConvert.SerializeObject(messageIds);
-
-                            command.Parameters.AddWithValue("@userId", userId);
-                            command.Parameters.AddWithValue("@jsonIds", jsonIds);
-
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.Message);
-                    throw;
-                }
-            }
-        }
-
-        public Message GetMessageInfo(Guid messageId)
+        public Message FindMessageById(Guid messageId)
         {
             using (var logger = new LogWrapper())
             {
                 if (messageId == Guid.Empty)
                 {
-                    logger.Error("Не указан Id сообщения.");
-                    throw new ArgumentNullException(nameof(messageId), "Не указан Id сообщения");
+                    logger.Error(ExceptionDescribed.MessageIdIsNull);
+                    return null;
                 }
-
                 try
                 {
-                    using (var connection = new SqlConnection(_connectionString))
+                    SqlParameter[] param = {new SqlParameter("@id", messageId)};
+                    string query = "SELECT id, theme, date, text, senderId FROM uf_Select_message_info_by_id(@id)";
+                    
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
                     {
-                        connection.Open();
+                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
 
-                        using (var command = connection.CreateCommand())
+                        if (data.Read())
                         {
-                            command.CommandText = "SELECT " +
-                                                  "id," +
-                                                  "theme," +
-                                                  "date," +
-                                                  "text," +
-                                                  "senderId " +
-                                                  "FROM uf_Select_message_info_by_id(@id)";
-
-                            command.Parameters.AddWithValue("@id", messageId);
-
-                            using (var reader = command.ExecuteReader())
+                            Message message = new Message
                             {
-                                while (reader.Read())
-                                {
-                                    var messageInfo = new Message
-                                    {
-                                        Id = reader.GetGuid(reader.GetOrdinal("id")),
-                                        Theme = reader.GetString(reader.GetOrdinal("theme")),
-                                        Date = reader.GetDateTime(reader.GetOrdinal("date")),
-                                        Text = reader.GetString(reader.GetOrdinal("text")),
-                                        User = _userRepository.FindById(reader.GetGuid(reader.GetOrdinal("senderId")))
-                                    };
-
-                                    return messageInfo;
-                                }
-                                logger.Error($"Сообщение с: {messageId} недоступено");
-                                throw new ArgumentException($"Сообщение с: {messageId} недоступно.");
-                            }
+                                Id = (Guid) data["id"],
+                                Theme = data["theme"].ToString(),
+                                Date = (DateTime) data["date"],
+                                Text = data["text"].ToString(),
+                                Sender = _userRepository.FindById((Guid) data["senderId"])
+                            };
+                            return message;
                         }
+                        logger.Error(ExceptionDescribed.MessageIsUnavailable(messageId));
+                        return null;
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e.Message);
-                    throw;
+                    logger.Error(e.StackTrace);
+                    return null;
+                }
+            }
+        }
+        
+        public IEnumerable<Message> GetMessagesInFolder(int folderId, Guid userId)
+        {
+            using (var logger = new LogWrapper())
+            {
+                if (folderId < 0)
+                {
+                    logger.Error(ExceptionDescribed.IdIsNegative);
+                    return null;
+                }
+                if (userId == Guid.Empty)
+                {
+                    logger.Error(ExceptionDescribed.GuidIsEmpty);
+                    return null;
+                }
+                try
+                {
+                    List<Message> userMessage = new List<Message>();
+                    SqlParameter[] param =
+                    {
+                        new SqlParameter("@folderId", folderId),
+                        new SqlParameter("@userId", userId),
+                    };
+                    string query = "SELECT messageId FROM uf_Select_user_messages_in_folder(@userId, @folderId)";
+
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
+                    {
+                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
+                        while (data.Read())
+                        {
+                            userMessage.Add(FindMessageById(userId));
+                        }
+                        return userMessage;
+                    }
+                }
+                catch (Exception e)
+                {
+                    logger.Error(e.StackTrace);
+                    return null;
                 }
             }
         }
 
-        public IEnumerable<Message> GetMessages(Guid userId)
+        public void DeleteMessages(IEnumerable<Guid> userMessageIds)
         {
             using (var logger = new LogWrapper())
             {
-                if (userId == Guid.Empty)
+                if (userMessageIds == null)
                 {
-                    logger.Error("Не указан пользователь");
-                    throw new ArgumentNullException(nameof(userId), "Не указан пользователь");
+                    logger.Error(ExceptionDescribed.DeletedIdIsNotSpecified);
+                    return;
                 }
-
                 try
                 {
-                    var messages = new List<Message>();
+                    SqlParameter[] param ={new SqlParameter("@userMessageIds", JsonConvert.SerializeObject(userMessageIds))};
 
-                    using (var connection = new SqlConnection(_connectionString))
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
                     {
-                        connection.Open();
-
-                        using (var command = connection.CreateCommand())
-                        {
-                            command.CommandText = "SELECT messageId FROM uf_Select_message_info_by_userid(@userId)";
-                            command.Parameters.AddWithValue("@userId", userId);
-
-                            using (var reader = command.ExecuteReader())
-                            {
-                                while (reader.Read())
-                                {
-                                    messages.Add(GetMessageInfo(reader.GetGuid(reader.GetOrdinal("messageId"))));
-                                }
-
-                                return messages;
-                            }
-                        }
+                        SqlHelper.ExecuteNonQuery(
+                            connection, 
+                            CommandType.StoredProcedure, 
+                            "up_Delete_user_messages",
+                            param);  
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e.Message);
-                    throw;
+                    logger.Error(e.StackTrace);
+                }
+            }
+        }
+
+        public void RemoveMessages(IEnumerable<Guid> userMessageIds)
+        {
+            using (var logger = new LogWrapper())
+            {
+                if (userMessageIds == null)
+                {
+                    logger.Error(ExceptionDescribed.DeletedIdIsNotSpecified);
+                    return;
+                }
+                try
+                {
+                    SqlParameter[] param ={new SqlParameter("@userMessageIds", JsonConvert.SerializeObject(userMessageIds))};
+
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
+                    {
+                        SqlHelper.ExecuteNonQuery(
+                            connection,
+                            CommandType.StoredProcedure,
+                            "up_Remove_user_messages",
+                            param);
+                    }
+                }
+                catch (Exception e)
+                {
+                    logger.Error(e.StackTrace);
                 }
             }
         }
@@ -168,87 +167,69 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             {
                 if (message == null)
                 {
-                    logger.Error("Сообщение не может быть пустым");
-                    throw new ArgumentNullException(nameof(message), "Сообщение не может быть пустым");
+                    logger.Error(ExceptionDescribed.MessageIsNull);
+                    return;
                 }
-
                 if (userIds == null)
                 {
-                    logger.Error("Не указаны пользователи для отправки сообщения");
-                    throw new ArgumentNullException(nameof(userIds), "Не указаны пользователи для отправки сообщения");
+                    logger.Error(ExceptionDescribed.UserIdsIsNull);
+                    return;
                 }
-
                 try
                 {
-                    using (var connection = new SqlConnection(_connectionString))
+                    message.Id = Guid.NewGuid();
+                    message.Date = DateTime.Now;
+
+                    SqlParameter[] param =
                     {
-                        connection.Open();
-
-                        using (var commmand = new SqlCommand("up_Send_new_Message", connection))
-                        {
-                            commmand.CommandType = CommandType.StoredProcedure;
-
-                            message.Id = Guid.NewGuid();
-                            message.Date = DateTime.Now;
-
-                            var jsonIds = JsonConvert.SerializeObject(userIds);
-
-                            commmand.Parameters.AddWithValue("@messageId", message.Id);
-                            commmand.Parameters.AddWithValue("@theme", message.Theme);
-                            commmand.Parameters.AddWithValue("@date", message.Date);
-                            commmand.Parameters.AddWithValue("@text", message.Text);
-                            commmand.Parameters.AddWithValue("@senderId", message.User.Id);
-                            commmand.Parameters.AddWithValue("@jsonIds", jsonIds);
-
-                            commmand.ExecuteNonQuery();
-                        }
+                        new SqlParameter("@messageId", message.Id),
+                        new SqlParameter("@theme", message.Theme),
+                        new SqlParameter("@date", message.Date),
+                        new SqlParameter("@text", message.Text),
+                        new SqlParameter("@senderId", message.Sender.Id),
+                        new SqlParameter("@jsonIds", JsonConvert.SerializeObject(userIds))
+                    };
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
+                    {
+                        SqlHelper.ExecuteNonQuery(
+                            connection, 
+                            CommandType.StoredProcedure, 
+                            "up_Send_new_Message",
+                            param);
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e.Message);
-                    throw;
+                    logger.Error(e.StackTrace);
                 }
             }
         }
 
-        public void UpdateMessageRead(Guid messageId, Guid userId)
+        public void UpdateMessageRead(Guid userMessageId)
         {
             using (var logger = new LogWrapper())
             {
-                if (messageId == Guid.Empty)
+                if (userMessageId == Guid.Empty)
                 {
-                    logger.Error("Не указано сообщение");
-                    throw new ArgumentNullException(nameof(messageId), "Не указано сообщение");
+                    logger.Error(ExceptionDescribed.UserMessageIdIsNull);
+                    return;
                 }
-
-                if (userId == Guid.Empty)
-                {
-                    logger.Error("Не указан пользователь");
-                    throw new ArgumentNullException(nameof(userId), "Не указан пользователь");
-                }
-
                 try
                 {
-                    using (var connection = new SqlConnection(_connectionString))
+                    SqlParameter[] param = { new SqlParameter("@userMessageId", userMessageId) };
+
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
                     {
-                        connection.Open();
-
-                        using (var commmand = new SqlCommand("up_Update_read_in_message", connection))
-                        {
-                            commmand.CommandType = CommandType.StoredProcedure;
-
-                            commmand.Parameters.AddWithValue("@messageId", messageId);
-                            commmand.Parameters.AddWithValue("@userId", userId);
-
-                            commmand.ExecuteNonQuery();
-                        }
+                        SqlHelper.ExecuteNonQuery(
+                            connection,
+                            CommandType.StoredProcedure,
+                            "up_Update_read_in_message",
+                            param);
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e.Message);
-                    throw;
+                    logger.Error(e.StackTrace);
                 }
             }
         }

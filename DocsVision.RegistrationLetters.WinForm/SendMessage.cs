@@ -27,14 +27,14 @@ namespace DocsVision.RegistrationLetters.WinForm
         {
             try
             {
-                CompositeMessageEmails mesEmails = new CompositeMessageEmails
+                MessageEmailsInputModel mesEmails = new MessageEmailsInputModel
                 {
                     Emails = textBoxSendTo.Text.Split(','),
                     Message = new Message
                     {
                         Text = textBoxText.Text,
                         Theme = textBoxTheme.Text,
-                        User = new User
+                        Sender = new User
                         {
                             Id = UserId
                         }

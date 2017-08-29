@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
+using DocsVision.RegistrationLetters.DataAccess.Sql.Exceptions;
+using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
 using DocsVision.RegistrationLetters.Log;
 using DocsVision.RegistrationLetters.Model;
 
@@ -7,68 +10,42 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
 {
     public class UserRepository : IUserRepository
     {
-        private readonly string _connectionString;
-
-        public UserRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
         public User FindByEmail(string email)
         {
             using (var logger = new LogWrapper())
             {
                 if (string.IsNullOrEmpty(email))
                 {
-                    logger.Error("Не указан email пользователя.");
-                    throw new ArgumentNullException(nameof(email), "Не указан email пользователя");
+                    logger.Error(ExceptionDescribed.EmailIsNull);
+                    return null;
                 }
-
                 try
                 {
-                    using (var connection = new SqlConnection(_connectionString))
+                    SqlParameter[] param = {new SqlParameter("@email", email)};
+                    string query = "SELECT id, name, secondname, email FROM uf_Select_user_info_by_email(@email)";
+
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
                     {
-                        connection.Open();
-
-                        using (var command = connection.CreateCommand())
+                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
+                        if (data.Read())
                         {
-                            command.CommandText = "SELECT " +
-                                                  "id," +
-                                                  "name," +
-                                                  "surname," +
-                                                  "department," +
-                                                  "position," +
-                                                  "email " +
-                                                  "FROM uf_Select_user_info_by_email(@email)";
-
-                            command.Parameters.AddWithValue("@email", email);
-
-                            using (var reader = command.ExecuteReader())
+                            User userInfo = new User
                             {
-                                while (reader.Read())
-                                {
-                                    var userInfo = new User
-                                    {
-                                        Id = reader.GetGuid(reader.GetOrdinal("id")),
-                                        Name = reader.GetString(reader.GetOrdinal("name")),
-                                        SurName = reader.GetString(reader.GetOrdinal("surname")),
-                                        Department = reader.GetString(reader.GetOrdinal("department")),
-                                        Position = reader.GetString(reader.GetOrdinal("position")),
-                                        Email = reader.GetString(reader.GetOrdinal("email")),
-                                    };
-
-                                    return userInfo;
-                                }
-                                logger.Error($"Пользователь c: {email} недоступен");
-                                throw new ArgumentException($"Пользователь c: {email} недоступен.");
-                            }
+                                Id = (Guid) data["id"],
+                                Name = data["name"].ToString(),
+                                SecondName = data["secondname"].ToString(),
+                                Email = data["email"].ToString()
+                            };
+                            return userInfo;
                         }
+                        logger.Error(ExceptionDescribed.StringIsUnavailable(email));
+                        return null;
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e.Message);
-                    throw;
+                    logger.Error(e.StackTrace);
+                    return null;
                 }
             }
         }
@@ -79,55 +56,36 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             {
                 if (id == Guid.Empty)
                 {
-                    logger.Error("Не указан id пользователя");
-                    throw new ArgumentNullException(nameof(id), "Не указан id пользователя");
+                    logger.Error(ExceptionDescribed.GuidIsEmpty);
+                    return null;
                 }
-
                 try
                 {
-                    using (var connection = new SqlConnection(_connectionString))
+                    SqlParameter[] param = {new SqlParameter("@id", id)};
+                    string query = "SELECT id, name, secondname, email FROM uf_Select_user_info_by_id(@id)";
+
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
                     {
-                        connection.Open();
-
-                        using (var command = connection.CreateCommand())
+                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
+                        if (data.Read())
                         {
-                            command.CommandText = "SELECT " +
-                                                  "id," +
-                                                  "name," +
-                                                  "surname," +
-                                                  "department," +
-                                                  "position," +
-                                                  "email " +
-                                                  "FROM uf_Select_user_info_by_id(@id)";
-
-                            command.Parameters.AddWithValue("@id", id);
-
-                            using (var reader = command.ExecuteReader())
+                            User userInfo = new User
                             {
-                                while (reader.Read())
-                                {
-                                    var userInfo = new User
-                                    {
-                                        Id = reader.GetGuid(reader.GetOrdinal("id")),
-                                        Name = reader.GetString(reader.GetOrdinal("name")),
-                                        SurName = reader.GetString(reader.GetOrdinal("surname")),
-                                        Department = reader.GetString(reader.GetOrdinal("department")),
-                                        Position = reader.GetString(reader.GetOrdinal("position")),
-                                        Email = reader.GetString(reader.GetOrdinal("email")),
-                                    };
-
-                                    return userInfo;
-                                }
-                                logger.Error($"Пользователь c: {id} недоступен");
-                                throw new ArgumentException($"Пользователь c: {id} недоступен.");
-                            }
+                                Id = (Guid) data["id"],
+                                Name = data["name"].ToString(),
+                                SecondName = data["secondname"].ToString(),
+                                Email = data["email"].ToString()
+                            };
+                            return userInfo;
                         }
+                        logger.Error(ExceptionDescribed.StringIsUnavailable(id.ToString()));
+                        return null;
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e.Message);
-                    throw;
+                    logger.Error(e.StackTrace);
+                    return null;
                 }
             }
         }

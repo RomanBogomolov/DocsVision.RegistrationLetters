@@ -20,7 +20,7 @@ namespace DocsVision.RegistrationLetters.Api.Models
         {
             return messages.Select(mes => new MessagesReturnModel
             {
-                    Url = _urlHelper.Link("GetMessageById", new {userId = mes.User.Id, messageId = mes.Id}),
+                    Url = _urlHelper.Link("GetMessageById", new {userId = mes.Sender.Id, messageId = mes.Id}),
                     Date = mes.Date,
                     Theme = mes.Theme,
                     Text = mes.Text
@@ -36,11 +36,9 @@ namespace DocsVision.RegistrationLetters.Api.Models
                 Theme = mes.Theme,
                 Date = mes.Date,
                 Text = mes.Text,
-                SenderId = mes.User.Id,
-                Fullname = $"{mes.User.Name} {mes.User.SurName}",
-                SenderEmail = mes.User.Email,
-                SenderDepartment = mes.User.Department,
-                SenderPosition = mes.User.Position
+                SenderId = mes.Sender.Id,
+                Fullname = $"{mes.Sender.Name} {mes.Sender.SecondName}",
+                SenderEmail = mes.Sender.Email
             };
         }
     }

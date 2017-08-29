@@ -35,7 +35,7 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
                 return BadRequest("Пользователь недоступен");
             }
 
-            var userMessages = _messageRepository.GetMessages(userId);
+            var userMessages = _messageRepository.FindMessageById(userId);
 
             /* 
              * 
@@ -55,7 +55,7 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
         [Route("{messageId:guid}/user/{userId:Guid}", Name = "GetMessageById")]
         public IHttpActionResult GetMessageInfo(Guid messageId, Guid userId)
         {
-            var messageInfo = _messageRepository.GetMessageInfo(messageId);
+            var messageInfo = _messageRepository.FindMessageById(messageId);
 
             if (messageInfo == null)
             {
@@ -63,7 +63,7 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
                 return BadRequest("Не удалось загрузить сообщение");
             }
 
-            _messageRepository.UpdateMessageRead(messageId, userId);
+            //_messageRepository.UpdateMessageRead(messageId, userId);
 
             return Ok(TheModelFactory.Create(messageInfo));
         }
@@ -91,7 +91,7 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
             }
 
             _messageRepository.SendMessage(obj.Message, userIds);
-            Logger.ServiceLog.Info($"Пользователь {obj.Message.User.Id} успешно отправил сообщения на {String.Join(",", obj.Emails)}");
+            Logger.ServiceLog.Info($"Пользователь {obj.Message.Sender.Id} успешно отправил сообщения на {String.Join(",", obj.Emails)}");
             
             return Ok();
         }
@@ -113,7 +113,7 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
              */
             foreach (var messageId in obj.MessageIds)
             {
-                var message = _messageRepository.GetMessageInfo(messageId);
+                var message = _messageRepository.FindMessageById(messageId);
 
                 if (message == null)
                 {
@@ -122,7 +122,7 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
                 }
             }
 
-            _messageRepository.DeleteMessages(obj.UserId, obj.MessageIds);
+            //_messageRepository.DeleteMessages(obj.UserId, obj.MessageIds);
             Logger.ServiceLog.Info($"Пользователь {obj.UserId} успешно удалил сообщения {String.Join(",", obj.MessageIds)}");
             return StatusCode(HttpStatusCode.NoContent);
         }
