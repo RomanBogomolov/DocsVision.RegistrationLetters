@@ -4566,3 +4566,177 @@ The statement has been terminated.
 2017-08-29 07:03:43.0097|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.DeleteFolder
 2017-08-29 07:04:33.5009|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserFolderRepository.DeleteFolder
 2017-08-29 07:04:35.2295|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserFolderRepository.DeleteFolder
+2017-08-29 10:51:03.0215|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 10:51:03.1190|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 10:51:03.1190|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 10:51:03.1580|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
+2017-08-29 10:51:03.1600|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 10:51:03.1600|WARN|DocsVision.RegistrationLetters.Log.Logger|Не удалось загрузить сообщения для пользователя 737af1c2-f090-49cc-b7e3-737774d99b7e
+2017-08-29 10:51:05.4238|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 10:51:05.4368|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 10:51:05.4368|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 10:51:05.4498|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
+2017-08-29 10:51:05.4498|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 10:51:05.4498|WARN|DocsVision.RegistrationLetters.Log.Logger|Не удалось загрузить сообщения для пользователя 737af1c2-f090-49cc-b7e3-737774d99b7e
+2017-08-29 10:51:41.7159|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 10:51:41.7359|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 10:51:41.7379|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 10:51:41.7759|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 266a1692-d089-45c9-afbd-bb6b8fbe7300 недоступено.
+2017-08-29 10:51:41.7759|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 10:51:41.7759|WARN|DocsVision.RegistrationLetters.Log.Logger|Не удалось загрузить сообщения для пользователя 266a1692-d089-45c9-afbd-bb6b8fbe7300
+2017-08-29 10:51:54.4922|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 10:51:54.5152|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 10:52:00.5345|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 10:52:00.5505|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 266a1692-d089-45c9-afbd-bb6b8fbe7300 недоступено.
+2017-08-29 10:52:00.5505|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:21:32.7527|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:21:32.8628|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:21:35.4986|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:21:35.5236|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:21:35.5426|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
+2017-08-29 11:21:35.5426|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:21:35.5426|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:22:15.6445|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:22:15.6655|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:22:16.6445|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:22:16.6595|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:22:16.6755|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
+2017-08-29 11:22:16.6755|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:22:16.6755|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:26:36.4436|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:26:36.5657|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:26:36.9417|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:26:36.9647|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:26:36.9967|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
+2017-08-29 11:26:36.9967|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:26:36.9967|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:29:35.1441|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:29:35.2541|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:29:40.9426|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:29:40.9586|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:29:40.9916|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:29:41.0206|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:29:41.0206|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:29:41.0206|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:30:27.1756|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:30:27.2646|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:30:27.3046|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:30:27.3046|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:37:08.8803|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:37:08.9803|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:37:08.9803|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:37:09.0023|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:37:09.0243|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:37:09.0403|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:37:09.0403|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:37:09.0403|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:42:45.1142|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:42:45.1982|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:42:45.1982|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:42:45.2172|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:42:45.2502|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:42:45.2662|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:42:45.2692|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:42:45.2692|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:43:49.1163|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:43:49.2193|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:43:49.2223|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:43:49.2513|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:43:49.2783|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:43:49.2963|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:43:49.2963|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:43:49.3023|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:44:07.7766|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:44:07.7926|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:44:07.8066|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:44:07.8066|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:45:05.6589|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:45:05.7539|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:45:05.7729|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:45:05.7729|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:54:27.3327|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:54:27.4227|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:54:27.4317|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:54:27.4467|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:54:27.4827|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:54:27.5137|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:54:27.5137|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 11:54:27.5207|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.GetMessagesInFolder
+2017-08-29 11:54:31.0424|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.FindMessageById
+2017-08-29 11:54:31.0574|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 11:54:31.0774|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 11:54:31.0774|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.FindMessageById
+2017-08-29 14:22:54.9264|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:23:19.1234|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.CheckUserEmail
+2017-08-29 14:25:28.3641|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:27:49.1912|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:29:15.7225|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:29:30.8618|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 40
+2017-08-29 14:31:05.3453|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:31:11.2083|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.CheckUserEmail
+2017-08-29 14:32:14.2072|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:32:14.3677|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 40
+2017-08-29 14:32:14.3677|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.CheckUserEmail
+2017-08-29 14:39:59.1447|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:39:59.2877|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at System.Data.SqlClient.SqlParameter.Validate(Int32 index, Boolean isCommandProc)
+   at System.Data.SqlClient.SqlCommand.SetUpRPCParameters(_SqlRPC rpc, Int32 startCount, Boolean inSchema, SqlParameterCollection parameters)
+   at System.Data.SqlClient.SqlCommand.BuildRPC(Boolean inSchema, SqlParameterCollection parameters, _SqlRPC& rpc)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper.SqlHelper.ExecuteNonQuery(SqlConnection conn, CommandType cmdType, String cmdText, SqlParameter[] cmdParms) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\SQLHelper\SqlHelper.cs:line 39
+   at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 38
+2017-08-29 14:39:59.2877|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.CheckUserEmail
+2017-08-29 14:40:31.2854|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:40:31.4614|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at System.Data.SqlClient.SqlParameter.Validate(Int32 index, Boolean isCommandProc)
+   at System.Data.SqlClient.SqlCommand.SetUpRPCParameters(_SqlRPC rpc, Int32 startCount, Boolean inSchema, SqlParameterCollection parameters)
+   at System.Data.SqlClient.SqlCommand.BuildRPC(Boolean inSchema, SqlParameterCollection parameters, _SqlRPC& rpc)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper.SqlHelper.ExecuteNonQuery(SqlConnection conn, CommandType cmdType, String cmdText, SqlParameter[] cmdParms) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\SQLHelper\SqlHelper.cs:line 39
+   at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 38
+2017-08-29 14:40:31.4614|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.CheckUserEmail
+2017-08-29 14:40:54.6925|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.CheckUserEmail
+2017-08-29 14:55:44.8031|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.GetInvalidUserEmails
+2017-08-29 14:57:45.3943|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.GetInvalidUserEmails
+2017-08-29 14:59:29.6327|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.GetInvalidUserEmails
+2017-08-29 15:00:30.3650|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.GetInvalidUserEmails
+2017-08-29 15:01:26.3628|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.GetInvalidUserEmails
+2017-08-29 15:02:24.5678|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.GetInvalidUserEmails
+2017-08-29 15:10:31.3708|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.GetInvalidUserEmails|Error message:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper.SqlHelper.ExecuteNonQuery(SqlConnection conn, CommandType cmdType, String cmdText, SqlParameter[] cmdParms) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\SQLHelper\SqlHelper.cs:line 39
+   at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.GetInvalidUserEmails(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 38
+2017-08-29 15:10:31.3773|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.GetInvalidUserEmails
+2017-08-29 15:10:31.3773|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method MessageRepository.SendMessage
+2017-08-29 15:10:31.4303|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method MessageRepository.SendMessage
+2017-08-29 15:10:31.4303|INFO|DocsVision.RegistrationLetters.Log.Logger|Пользователь 95f77d27-a9b2-4ce0-870b-3ec1f6058733 успешно отправил сообщения на test2@gmail.com,test1@gmail.com,test10@gmail.com,test12@gmail.com,test22@gmail.com
+2017-08-29 15:10:37.6623|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.GetInvalidUserEmails
+2017-08-29 15:10:41.1109|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.GetInvalidUserEmails
+2017-08-29 17:15:08.0801|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:15:08.2367|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:15:14.4894|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:15:14.5039|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:15:15.3904|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:15:15.4034|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:15:16.0625|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:15:16.0755|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:15:22.5923|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:15:22.6061|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:15:23.2847|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:15:23.3064|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:15:23.8616|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:15:23.8616|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:19:11.7673|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Start of method UserRepository.FindById
+2017-08-29 17:19:11.8738|INFO|DocsVision.RegistrationLetters.Log.LogWrapper|Finish of method UserRepository.FindById
+2017-08-29 17:36:45.2850|ERROR|MessageRepository.cs|   at DocsVision.RegistrationLetters.DataAccess.Sql.MessageRepository.FindMessageById(Guid messageId) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\MessageRepository.cs:line 35

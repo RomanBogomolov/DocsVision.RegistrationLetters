@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Routing;
-using DocsVision.RegistrationLetters.Model;
 
 namespace DocsVision.RegistrationLetters.Api.Models
 {
@@ -16,11 +15,11 @@ namespace DocsVision.RegistrationLetters.Api.Models
             _urlHelper = new UrlHelper(request);
         }
 
-        public IEnumerable<MessagesReturnModel> Create(IEnumerable<Message> messages)
+        public IEnumerable<MessagesReturnModel> Create(IEnumerable<Model.Message> messages)
         {
-            return messages.Select(mes => new MessagesReturnModel
-            {
-                    Url = _urlHelper.Link("GetMessageById", new {userId = mes.Sender.Id, messageId = mes.Id}),
+            return messages?.Select(mes => new MessagesReturnModel
+                {
+                    Url = _urlHelper.Link("GetMessageById", new {messageId = mes.Id}),
                     Date = mes.Date,
                     Theme = mes.Theme,
                     Text = mes.Text
@@ -28,8 +27,13 @@ namespace DocsVision.RegistrationLetters.Api.Models
                 .ToList();
         }
 
-        public MessagesInfoReturnModel Create(Message mes)
+        public MessagesInfoReturnModel Create(Model.Message mes)
         {
+            if (mes == null)
+            {
+                return null;
+            }
+
             return new MessagesInfoReturnModel
             {
                 MessageId = mes.Id,
@@ -60,8 +64,6 @@ namespace DocsVision.RegistrationLetters.Api.Models
         public Guid SenderId { get; set; }
         public string Fullname { get; set; }
         public string SenderEmail { get; set; }
-        public string SenderDepartment { get; set; }
-        public string SenderPosition { get; set; }
         
     }
 }

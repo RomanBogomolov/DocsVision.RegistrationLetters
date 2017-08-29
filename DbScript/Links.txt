@@ -1,0 +1,7 @@
+https://thesai.org/Downloads/Volume7No4/Paper_34-Improve_Query_Performance_On_Hierarchical_Data.pdf
+
+http://blog.byndyu.ru/2013/03/dapper-queryobject-orm.html
+
+**https://stackoverflow.com/questions/9218847/how-do-i-handle-database-connections-with-dapper-in-net
+
+http://ntrush.blogspot.ru/2012/11/nlog-and-logging-abstractions.html

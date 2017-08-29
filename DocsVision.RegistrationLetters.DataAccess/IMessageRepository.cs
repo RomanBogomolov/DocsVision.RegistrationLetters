@@ -40,5 +40,11 @@ namespace DocsVision.RegistrationLetters.DataAccess
         /// </summary>
         /// <param name="userMessageId">Id сообщения пользователя</param>
         void UpdateMessageRead(Guid userMessageId);
+        /// <summary>
+        /// Перемещение сообщений между папками
+        /// </summary>
+        /// <param name="userMessageId">Id сообщения</param>
+        /// <param name="folderId">Id папки</param>
+        void MoveUserMessage(int folderId, Guid userMessageId);
     }
 }

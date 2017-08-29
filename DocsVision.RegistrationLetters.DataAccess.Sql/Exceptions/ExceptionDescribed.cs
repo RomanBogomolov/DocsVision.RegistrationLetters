@@ -15,7 +15,5 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql.Exceptions
         public static string EmailIsNull => "Email пользователя не может быть пустым.";
         public static string StringIsUnavailable(string str) => $"Пользователя  c: {str} недоступен.";
         public static string MessageIsUnavailable(Guid mes) => $"Сообщение c: {mes} недоступено.";
-
-
     }
 }

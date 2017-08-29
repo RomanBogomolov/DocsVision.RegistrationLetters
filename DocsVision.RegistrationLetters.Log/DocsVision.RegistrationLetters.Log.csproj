@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILogger.cs" />
+    <Compile Include="NLogLogger.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LogWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

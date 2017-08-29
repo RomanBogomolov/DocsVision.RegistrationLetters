@@ -2,6 +2,7 @@
 using DocsVision.RegistrationLetters.Api.Models;
 using DocsVision.RegistrationLetters.Api.Models.Validators;
 using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
+using DocsVision.RegistrationLetters.Log;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DocsVision.RegistrationLetters.Api.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(DocsVision.RegistrationLetters.Api.App_Start.NinjectWebCommon), "Stop")]
@@ -26,20 +27,20 @@ namespace DocsVision.RegistrationLetters.Api.App_Start
     using DocsVision.RegistrationLetters.DataAccess.Sql;
     using DocsVision.RegistrationLetters.Model.Validators;
     using DocsVision.RegistrationLetters.Model;
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -47,7 +48,7 @@ namespace DocsVision.RegistrationLetters.Api.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -81,16 +82,22 @@ namespace DocsVision.RegistrationLetters.Api.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["MessageDb"].ConnectionString;
-            
+
             /* DAL */
-            kernel.Inject(new SqlHelper(connectionString));
+            //kernel.Inject(new SqlHelper(connectionString));
+            kernel.Bind<string>().ToConstant(connectionString);
             kernel.Bind<IUserRepository>().To<UserRepository>();
             kernel.Bind<IMessageRepository>().To<MessageRepository>();
+               
             kernel.Bind<IUserFolderRepository>().To<UserFolderRepository>();
-            
+
             /* Validators */
             kernel.Bind<IValidator<Message>>().To<MessageValidator>();
             kernel.Bind<IValidator<MessageEmailsInputModel>>().To<MessageEmailsInputModelValidator>();
-        }        
+
+            /* NLog */
+            kernel.Bind<ILogger>().To<NLogLogger>()
+                .WithConstructorArgument("sourceFilePath", x => x.Request.ParentContext.Request.Service.FullName);
+        }
     }
 }

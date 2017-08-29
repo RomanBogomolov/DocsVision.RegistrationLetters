@@ -7,100 +7,56 @@ using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
 using DocsVision.RegistrationLetters.Log;
 using DocsVision.RegistrationLetters.Model;
 using Newtonsoft.Json;
+using DocsVision.RegistrationLetters.DataAccess.Sql.SqlSrtring;
 
 namespace DocsVision.RegistrationLetters.DataAccess.Sql
 {
-    public class MessageRepository : IMessageRepository
+    public class MessageRepository : BaseRepository, IMessageRepository
     {
         private readonly IUserRepository _userRepository;
 
-        public MessageRepository(IUserRepository userRepository)
+        public MessageRepository(string connectionString, IUserRepository userRepository, ILogger logger) : base(connectionString, logger)
         {
             _userRepository = userRepository;
         }
 
         public Message FindMessageById(Guid messageId)
         {
-            using (var logger = new LogWrapper())
+            if (messageId == Guid.Empty)
             {
-                if (messageId == Guid.Empty)
-                {
-                    logger.Error(ExceptionDescribed.MessageIdIsNull);
-                    return null;
-                }
-                try
-                {
-                    SqlParameter[] param = {new SqlParameter("@id", messageId)};
-                    string query = "SELECT id, theme, date, text, senderId FROM uf_Select_message_info_by_id(@id)";
-                    
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
-
-                        if (data.Read())
-                        {
-                            Message message = new Message
-                            {
-                                Id = (Guid) data["id"],
-                                Theme = data["theme"].ToString(),
-                                Date = (DateTime) data["date"],
-                                Text = data["text"].ToString(),
-                                Sender = _userRepository.FindById((Guid) data["senderId"])
-                            };
-                            return message;
-                        }
-                        logger.Error(ExceptionDescribed.MessageIsUnavailable(messageId));
-                        return null;
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                    return null;
-                }
+                throw new ArgumentOutOfRangeException(nameof(messageId));
+            }
+            try
+            {
+                return QueryFirstOrDefault<Message>(SqlStrings.SelectMessageById, new { id = messageId });
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+                return null;
             }
         }
         
         public IEnumerable<Message> GetMessagesInFolder(int folderId, Guid userId)
         {
-            using (var logger = new LogWrapper())
+            if (folderId < 0)
             {
-                if (folderId < 0)
-                {
-                    logger.Error(ExceptionDescribed.IdIsNegative);
-                    return null;
-                }
-                if (userId == Guid.Empty)
-                {
-                    logger.Error(ExceptionDescribed.GuidIsEmpty);
-                    return null;
-                }
-                try
-                {
-                    List<Message> userMessage = new List<Message>();
-                    SqlParameter[] param =
-                    {
-                        new SqlParameter("@folderId", folderId),
-                        new SqlParameter("@userId", userId),
-                    };
-                    string query = "SELECT messageId FROM uf_Select_user_messages_in_folder(@userId, @folderId)";
-
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
-                        while (data.Read())
-                        {
-                            userMessage.Add(FindMessageById(userId));
-                        }
-                        return userMessage;
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                    return null;
-                }
+                throw new ArgumentOutOfRangeException(nameof(folderId));
             }
+            if (userId == Guid.Empty)
+            {
+                throw new ArgumentOutOfRangeException(nameof(userId));
+            }
+            try
+            {
+                return Query<Message>("up_Select_user_messages_in_folder", new { folderId = folderId, userId = userId }, CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+                return null;
+            }
+            
         }
 
         public void DeleteMessages(IEnumerable<Guid> userMessageIds)
@@ -224,6 +180,43 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
                             connection,
                             CommandType.StoredProcedure,
                             "up_Update_read_in_message",
+                            param);
+                    }
+                }
+                catch (Exception e)
+                {
+                    logger.Error(e.StackTrace);
+                }
+            }
+        }
+
+        public void MoveUserMessage(int folderId, Guid userMessageId)
+        {
+            using (var logger = new LogWrapper())
+            {
+                if (userMessageId == Guid.Empty)
+                {
+                    logger.Error(ExceptionDescribed.GuidIsEmpty);
+                    return;
+                }
+                if (folderId < 0)
+                {
+                    logger.Error(ExceptionDescribed.IdIsNegative);
+                    return;
+                }
+                try
+                {
+                    SqlParameter[] param =
+                    {
+                        new SqlParameter("@folderId", folderId),
+                        new SqlParameter("@userMessageId", userMessageId)
+                    };
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
+                    {
+                        SqlHelper.ExecuteNonQuery(
+                            connection,
+                            CommandType.StoredProcedure,
+                            "up_Move_user_message_in_folder",
                             param);
                     }
                 }

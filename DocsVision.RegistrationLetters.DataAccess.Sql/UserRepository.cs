@@ -5,11 +5,53 @@ using DocsVision.RegistrationLetters.DataAccess.Sql.Exceptions;
 using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
 using DocsVision.RegistrationLetters.Log;
 using DocsVision.RegistrationLetters.Model;
+using Newtonsoft.Json;
 
 namespace DocsVision.RegistrationLetters.DataAccess.Sql
 {
     public class UserRepository : IUserRepository
     {
+        public object[] GetInvalidUserEmails(string[] emails)
+        {
+            using (var logger = new LogWrapper())
+            {
+                if (emails == null)
+                {
+                    logger.Error(ExceptionDescribed.EmailIsNull);
+                    return null;
+                }
+
+                try
+                {
+                    string invalidEmails = string.Empty;
+                    SqlParameter[] param =
+                    {
+                        new SqlParameter("@Emails", JsonConvert.SerializeObject(emails)),
+                        new SqlParameter("@invalidEmails", SqlDbType.NVarChar, 4000)
+                        {
+                            Direction = ParameterDirection.Output
+                        },
+                    };
+
+                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
+                    {
+                        SqlHelper.ExecuteNonQuery(
+                            connection, 
+                            CommandType.StoredProcedure, 
+                            "up_Check_user_emails",
+                            param);
+
+                        return param[1].Value as object[];
+                    }
+                }
+                catch (Exception e)
+                {
+                    logger.Error(e.StackTrace);
+                    return null;
+                }
+            }
+        }
+
         public User FindByEmail(string email)
         {
             using (var logger = new LogWrapper())
