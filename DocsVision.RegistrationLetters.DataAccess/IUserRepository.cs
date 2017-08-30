@@ -8,12 +8,14 @@ namespace DocsVision.RegistrationLetters.DataAccess
     {
         User FindById(Guid id);
         User FindByEmail(string email);
-
+        void RegisterUser(User user);
+        void DeleteUser(Guid id);
+        IEnumerable<User> GetAllUsers();
         /// <summary>
         /// Проверим существование email-ов пользователей, которым отправляем сообщения
         /// </summary>
         /// <param name="emails">Массив email-ов</param>
         /// <returns>Невалидные email-ы</returns>
-        object[] GetInvalidUserEmails(string[] emails);
+        IEnumerable<string> GetInvalidUserEmails(string[] emails);
     }
 }

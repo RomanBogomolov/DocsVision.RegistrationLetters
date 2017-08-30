@@ -5,3 +5,5 @@ http://blog.byndyu.ru/2013/03/dapper-queryobject-orm.html
 **https://stackoverflow.com/questions/9218847/how-do-i-handle-database-connections-with-dapper-in-net
 
 http://ntrush.blogspot.ru/2012/11/nlog-and-logging-abstractions.html
+
+**http://adamjamesbull.co.uk/words/multi-mapping-one-to-many-relationships-with-dapper-using-a-single-sql-join-statement

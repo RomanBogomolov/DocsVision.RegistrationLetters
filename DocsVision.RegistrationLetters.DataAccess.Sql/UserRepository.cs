@@ -1,134 +1,125 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using DocsVision.RegistrationLetters.DataAccess.Sql.Exceptions;
-using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
+using Dapper;
+using DocsVision.RegistrationLetters.DataAccess.Sql.Sql;
 using DocsVision.RegistrationLetters.Log;
 using DocsVision.RegistrationLetters.Model;
 using Newtonsoft.Json;
 
 namespace DocsVision.RegistrationLetters.DataAccess.Sql
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
-        public object[] GetInvalidUserEmails(string[] emails)
+        public UserRepository(string connectionString, ILogger logger) : base(connectionString, logger)
         {
-            using (var logger = new LogWrapper())
+        }
+
+        /* 
+         * Сделать!!! 
+         */
+        public IEnumerable<string> GetInvalidUserEmails(string[] emails)
+        {
+            if (emails == null)
             {
-                if (emails == null)
-                {
-                    logger.Error(ExceptionDescribed.EmailIsNull);
-                    return null;
-                }
+                throw new ArgumentNullException(nameof(emails));
+            }
+            try
+            {
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@Emails", JsonConvert.SerializeObject(emails));
+                param.Add("@invalidEmails", dbType: DbType.String, direction: ParameterDirection.Output);
 
-                try
-                {
-                    string invalidEmails = string.Empty;
-                    SqlParameter[] param =
-                    {
-                        new SqlParameter("@Emails", JsonConvert.SerializeObject(emails)),
-                        new SqlParameter("@invalidEmails", SqlDbType.NVarChar, 4000)
-                        {
-                            Direction = ParameterDirection.Output
-                        },
-                    };
+                Execute("up_Check_user_emails", param, CommandType.StoredProcedure);
 
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlHelper.ExecuteNonQuery(
-                            connection, 
-                            CommandType.StoredProcedure, 
-                            "up_Check_user_emails",
-                            param);
+                var unRegistredEmails = param.Get<string>("@invalidEmails");
 
-                        return param[1].Value as object[];
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                    return null;
-                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+                return null;
             }
         }
 
         public User FindByEmail(string email)
         {
-            using (var logger = new LogWrapper())
+            if (string.IsNullOrEmpty(email))
             {
-                if (string.IsNullOrEmpty(email))
-                {
-                    logger.Error(ExceptionDescribed.EmailIsNull);
-                    return null;
-                }
-                try
-                {
-                    SqlParameter[] param = {new SqlParameter("@email", email)};
-                    string query = "SELECT id, name, secondname, email FROM uf_Select_user_info_by_email(@email)";
-
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
-                        if (data.Read())
-                        {
-                            User userInfo = new User
-                            {
-                                Id = (Guid) data["id"],
-                                Name = data["name"].ToString(),
-                                SecondName = data["secondname"].ToString(),
-                                Email = data["email"].ToString()
-                            };
-                            return userInfo;
-                        }
-                        logger.Error(ExceptionDescribed.StringIsUnavailable(email));
-                        return null;
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                    return null;
-                }
+                throw new ArgumentNullException(nameof(email));
+            }
+            try
+            {
+                return QueryFirstOrDefault<User>(SqlStrings.FindUserByEmail, new {email});
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+                return null;
             }
         }
 
         public User FindById(Guid id)
         {
-            using (var logger = new LogWrapper())
+            if (id == Guid.Empty)
             {
-                if (id == Guid.Empty)
-                {
-                    logger.Error(ExceptionDescribed.GuidIsEmpty);
-                    return null;
-                }
-                try
-                {
-                    SqlParameter[] param = {new SqlParameter("@id", id)};
-                    string query = "SELECT id, name, secondname, email FROM uf_Select_user_info_by_id(@id)";
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+            try
+            {
+                return QueryFirstOrDefault<User>(SqlStrings.FindUserById, new {id});
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+                return null;
+            }
+        }
 
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlDataReader data = SqlHelper.ExecuteReader(connection, CommandType.Text, query, param);
-                        if (data.Read())
-                        {
-                            User userInfo = new User
-                            {
-                                Id = (Guid) data["id"],
-                                Name = data["name"].ToString(),
-                                SecondName = data["secondname"].ToString(),
-                                Email = data["email"].ToString()
-                            };
-                            return userInfo;
-                        }
-                        logger.Error(ExceptionDescribed.StringIsUnavailable(id.ToString()));
-                        return null;
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                    return null;
-                }
+        public void RegisterUser(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            try
+            {
+                Execute(StoreProcedures.CreateNewUser, new {user.Id, user.Name, user.Email, user.SecondName},
+                    CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+            }
+        }
+
+        public void DeleteUser(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+            try
+            {
+                Execute(StoreProcedures.DeleteUser, new { id }, CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+            }
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            try
+            {
+                return Query<User>(SqlStrings.GetAllUsers, CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+                return null;
             }
         }
     }

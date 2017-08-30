@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -35,28 +36,63 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
         }
         
-        /* СДЕЛАТЬ!!! */
-        protected IEnumerable<T> Query<T,TSecond, TResult>(string sql, ( object parameters = null, CommandType? type = null)
+        protected IEnumerable<TResult> Query<TFirst, TSecond, TResult>(string sql, Func<TFirst, TSecond, TResult> func = null, object parameters = null, CommandType? type = null)
         {
             using (var connection = CreateConnection())
             {
                 connection.Open();
-                return connection.Query<T>(sql, parameters, commandType: type);
+                return connection.Query(sql, func, parameters, commandType: type);
             }
         }
 
-        protected int Execute(string sql, object parameters = null)
+        protected int Execute(string sql, object parameters = null, CommandType? type = null)
         {
             using (var connection = CreateConnection())
             {
                 connection.Open();
-                return connection.Execute(sql, parameters);
+                return connection.Execute(sql, parameters, commandType: type);
             }
         }
+
+
+        /*
+         * Подумать!!!
+         */
+        protected IEnumerable<TParent> MultipleTablesQuery<TParent, TChild, TParentKey>(
+            string sql,
+            Func<TParent, TParentKey> parentKeySelector, 
+            Func<TParent, TChild> childSelector, 
+            object param = null, 
+            string splitOn = "Id",
+            CommandType? commandType = null)
+        {
+            IDictionary<TParentKey, TParent> cache = new Dictionary<TParentKey, TParent>();
+
+            using (var connection = CreateConnection())
+            {
+                connection.Open();
+
+                connection.Query<TParent, TChild, TParent>(sql, (parent, child) =>
+                {
+                    if (!cache.ContainsKey(parentKeySelector(parent)))
+                    {
+                        cache.Add(parentKeySelector(parent), parent);
+                    }
+                    TParent cachedParent = cache[parentKeySelector(parent)];
+                    //TChild children = child;
+                    child = childSelector(cachedParent);
+
+                    return cachedParent;
+
+                }, param, splitOn: splitOn, commandType: commandType);
+
+                return cache.Values;
+            }
+        }
+
         private IDbConnection CreateConnection()
         {
             var connection = new SqlConnection(_connectionString);
-
             return connection;
         }
     }

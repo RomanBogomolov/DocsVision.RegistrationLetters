@@ -1,79 +1,10 @@
-2017-07-02 16:27:45.4941|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: sdkljkjbhdskj недоступен
-2017-07-02 16:27:45.5275|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: sdkljkjbhdskj недоступен.
-2017-07-10 08:04:17.7362|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.SendMessage|Error message: Ссылка на объект не указывает на экземпляр объекта.
-2017-07-10 09:23:34.5188|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: romka.pm@gmail.com недоступен
-2017-07-10 09:23:34.5408|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: romka.pm@gmail.com недоступен.
-2017-07-10 09:24:45.8399|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: 234342 недоступен
-2017-07-10 09:24:48.0342|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: 234342 недоступен.
-2017-07-10 09:29:25.3428|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Не указан id пользователя
-2017-07-10 09:30:54.4326|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Не указан id пользователя
-2017-07-10 10:11:20.3907|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: sdfsag@sdgew недоступен
-2017-07-10 10:11:20.4413|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindByEmail|Error message: Пользователь c: sdfsag@sdgew недоступен.
-2017-08-29 00:20:03.3993|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.GetMessageInfo|Error message: Значение не может быть неопределенным.
-2017-08-29 00:26:42.1566|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Invalid column name 'surname'.
-Invalid column name 'department'.
-Invalid column name 'position'.
-Could not use view or function 'uf_Select_user_info_by_id' because of binding errors.
-2017-08-29 00:26:46.4961|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.GetMessageInfo|Error message: Invalid column name 'surname'.
-Invalid column name 'department'.
-Invalid column name 'position'.
-Could not use view or function 'uf_Select_user_info_by_id' because of binding errors.
-2017-08-29 00:29:46.8720|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Invalid column name 'surname'.
-Invalid column name 'department'.
-Invalid column name 'position'.
-Could not use view or function 'uf_Select_user_info_by_id' because of binding errors.
-2017-08-29 00:31:20.0882|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.FindById|Error message: Invalid column name 'surname'.
-Invalid column name 'department'.
-Invalid column name 'position'.
-2017-08-29 00:31:20.5380|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.GetMessageInfo|Error message: Invalid column name 'surname'.
-Invalid column name 'department'.
-Invalid column name 'position'.
-2017-08-29 02:37:38.6450|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.SendMessage|Error message: Violation of PRIMARY KEY constraint 'PK_UserMessage'. Cannot insert duplicate key in object 'dbo.UserMessage'. The duplicate key value is (266a1692-d089-45c9-afbd-bb6b8fbe7300, 14dc4a5a-c85f-4b5b-b8cd-4544fac99622).
-The statement has been terminated.
-2017-08-29 02:40:47.0735|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.SendMessage|Error message: Violation of PRIMARY KEY constraint 'PK_UserMessage'. Cannot insert duplicate key in object 'dbo.UserMessage'. The duplicate key value is (266a1692-d089-45c9-afbd-bb6b8fbe7300, b8bb7e2c-4472-40bd-bfff-012b0deac6a3).
-The statement has been terminated.
-2017-08-29 05:55:22.9696|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
-2017-08-29 06:01:03.6861|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
-2017-08-29 06:03:19.8308|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
-2017-08-29 06:35:50.3846|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
-2017-08-29 06:35:52.3758|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
-2017-08-29 06:36:32.4490|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserFolderRepository.GetUserFolders|Error message:    в DocsVision.RegistrationLetters.DataAccess.Sql.UserFolderRepository.GetUserFolders(Guid userId) в D:\Projects\RegistrationLetters\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserFolderRepository.cs:строка 76
-2017-08-29 10:51:03.1580|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
-2017-08-29 10:51:05.4498|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
-2017-08-29 10:51:41.7759|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 266a1692-d089-45c9-afbd-bb6b8fbe7300 недоступено.
-2017-08-29 10:52:00.5505|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 266a1692-d089-45c9-afbd-bb6b8fbe7300 недоступено.
-2017-08-29 11:21:35.5426|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
-2017-08-29 11:22:16.6755|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
-2017-08-29 11:26:36.9967|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method MessageRepository.FindMessageById|Error message: Сообщение c: 737af1c2-f090-49cc-b7e3-737774d99b7e недоступено.
-2017-08-29 14:29:30.8618|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 40
-2017-08-29 14:32:14.3677|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 40
-2017-08-29 14:39:59.2877|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at System.Data.SqlClient.SqlParameter.Validate(Int32 index, Boolean isCommandProc)
-   at System.Data.SqlClient.SqlCommand.SetUpRPCParameters(_SqlRPC rpc, Int32 startCount, Boolean inSchema, SqlParameterCollection parameters)
-   at System.Data.SqlClient.SqlCommand.BuildRPC(Boolean inSchema, SqlParameterCollection parameters, _SqlRPC& rpc)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
-   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
-   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
-   at DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper.SqlHelper.ExecuteNonQuery(SqlConnection conn, CommandType cmdType, String cmdText, SqlParameter[] cmdParms) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\SQLHelper\SqlHelper.cs:line 39
-   at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 38
-2017-08-29 14:40:31.4614|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.CheckUserEmail|Error message:    at System.Data.SqlClient.SqlParameter.Validate(Int32 index, Boolean isCommandProc)
-   at System.Data.SqlClient.SqlCommand.SetUpRPCParameters(_SqlRPC rpc, Int32 startCount, Boolean inSchema, SqlParameterCollection parameters)
-   at System.Data.SqlClient.SqlCommand.BuildRPC(Boolean inSchema, SqlParameterCollection parameters, _SqlRPC& rpc)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
-   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
-   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
-   at DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper.SqlHelper.ExecuteNonQuery(SqlConnection conn, CommandType cmdType, String cmdText, SqlParameter[] cmdParms) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\SQLHelper\SqlHelper.cs:line 39
-   at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.CheckUserEmail(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 38
-2017-08-29 15:10:31.3708|ERROR|DocsVision.RegistrationLetters.Log.LogWrapper|Method UserRepository.GetInvalidUserEmails|Error message:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
-   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
-   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
-   at DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper.SqlHelper.ExecuteNonQuery(SqlConnection conn, CommandType cmdType, String cmdText, SqlParameter[] cmdParms) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\SQLHelper\SqlHelper.cs:line 39
-   at DocsVision.RegistrationLetters.DataAccess.Sql.UserRepository.GetInvalidUserEmails(String[] emails) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\UserRepository.cs:line 38
-2017-08-29 17:36:45.2850|ERROR|MessageRepository.cs|   at DocsVision.RegistrationLetters.DataAccess.Sql.MessageRepository.FindMessageById(Guid messageId) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\MessageRepository.cs:line 35
+2017-08-30 17:12:18.7524|ERROR|MessageRepository.cs|   at Dapper.SqlMapper.GetNextSplit(Int32 startIdx, String splitOn, IDataReader reader)
+   at Dapper.SqlMapper.GenerateDeserializers(Type[] types, String splitOn, IDataReader reader)
+   at Dapper.SqlMapper.<MultiMapImpl>d__140`8.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Dapper.SqlMapper.MultiMap[TFirst,TSecond,TThird,TFourth,TFifth,TSixth,TSeventh,TReturn](IDbConnection cnn, String sql, Delegate map, Object param, IDbTransaction transaction, Boolean buffered, String splitOn, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at Dapper.SqlMapper.Query[TFirst,TSecond,TReturn](IDbConnection cnn, String sql, Func`3 map, Object param, IDbTransaction transaction, Boolean buffered, String splitOn, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at DocsVision.RegistrationLetters.DataAccess.Sql.BaseRepository.Query[TFirst,TSecond,TResult](String sql, Func`3 func, Object parameters, Nullable`1 type) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\BaseRepository.cs:line 44
+   at DocsVision.RegistrationLetters.DataAccess.Sql.BaseRepository.MultipleTablesQuery[TParent,TChild,TParentKey](String sql, Func`2 parentKeySelector, Func`2 childSelector, Object param, String splitOn, Nullable`1 commandType) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\BaseRepository.cs:line 65
+   at DocsVision.RegistrationLetters.DataAccess.Sql.MessageRepository.FindMessageById(Guid messageId) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\MessageRepository.cs:line 27

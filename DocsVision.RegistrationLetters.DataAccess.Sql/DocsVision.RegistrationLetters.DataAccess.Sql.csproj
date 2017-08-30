@@ -51,8 +51,9 @@
     <Compile Include="Exceptions\ExceptionDescribed.cs" />
     <Compile Include="MessageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLHelper\SqlHelper.cs" />
-    <Compile Include="SqlSrtring\SqlStrings.cs" />
+    <Compile Include="RoleRepository.cs" />
+    <Compile Include="Sql\SqlStrings.cs" />
+    <Compile Include="Sql\StoreProcedures.cs" />
     <Compile Include="UserFolderRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>

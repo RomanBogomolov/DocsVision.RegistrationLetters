@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using DocsVision.RegistrationLetters.DataAccess.Sql.Exceptions;
-using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
+using System.Linq;
+using DocsVision.RegistrationLetters.DataAccess.Sql.Sql;
 using DocsVision.RegistrationLetters.Log;
 using DocsVision.RegistrationLetters.Model;
 using Newtonsoft.Json;
-using DocsVision.RegistrationLetters.DataAccess.Sql.SqlSrtring;
 
 namespace DocsVision.RegistrationLetters.DataAccess.Sql
 {
     public class MessageRepository : BaseRepository, IMessageRepository
     {
-        private readonly IUserRepository _userRepository;
-
-        public MessageRepository(string connectionString, IUserRepository userRepository, ILogger logger) : base(connectionString, logger)
+        public MessageRepository(string connectionString, ILogger logger) : base(connectionString, logger)
         {
-            _userRepository = userRepository;
         }
 
         public Message FindMessageById(Guid messageId)
@@ -28,7 +23,9 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
             try
             {
-                return QueryFirstOrDefault<Message>(SqlStrings.SelectMessageById, new { id = messageId });
+//                return QueryFirstOrDefault<Message>(SqlStrings.SelectMessageById, new { id = messageId });
+                return MultipleTablesQuery<Message, User, Guid>(StoreProcedures.SelectMessageByid, m => m.Id, u => u.Sender,
+                    new { id = messageId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -49,181 +46,125 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
             try
             {
-                return Query<Message>("up_Select_user_messages_in_folder", new { folderId = folderId, userId = userId }, CommandType.StoredProcedure);
+                var lookup = new Dictionary<Guid, Message>();
+                Query<Message, User, Message>(StoreProcedures.GetUserMessagesInFolder, (m, u) =>
+                {
+                    Message mess;
+                    if (!lookup.TryGetValue(m.Id, out mess))
+                        lookup.Add(m.Id, mess = m);
+                    if (mess.Sender == null)
+                        mess.Sender = new User();
+                    mess.Sender = u;
+                    return mess;
+                }, new { folderId, userId }, CommandType.StoredProcedure);
+
+                var messages = lookup.Values.ToList();
+                return messages;
             }
             catch (Exception e)
             {
                 _logger.Error(e.StackTrace);
                 return null;
             }
-            
         }
 
         public void DeleteMessages(IEnumerable<Guid> userMessageIds)
         {
-            using (var logger = new LogWrapper())
+            if (userMessageIds == null)
             {
-                if (userMessageIds == null)
-                {
-                    logger.Error(ExceptionDescribed.DeletedIdIsNotSpecified);
-                    return;
-                }
-                try
-                {
-                    SqlParameter[] param ={new SqlParameter("@userMessageIds", JsonConvert.SerializeObject(userMessageIds))};
-
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlHelper.ExecuteNonQuery(
-                            connection, 
-                            CommandType.StoredProcedure, 
-                            "up_Delete_user_messages",
-                            param);  
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                }
+                throw new ArgumentNullException(nameof(userMessageIds));
+            }
+            try
+            {
+                Execute(StoreProcedures.DeleteUserMessages, new {userMessageIds}, CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
             }
         }
 
         public void RemoveMessages(IEnumerable<Guid> userMessageIds)
         {
-            using (var logger = new LogWrapper())
+            if (userMessageIds == null)
             {
-                if (userMessageIds == null)
-                {
-                    logger.Error(ExceptionDescribed.DeletedIdIsNotSpecified);
-                    return;
-                }
-                try
-                {
-                    SqlParameter[] param ={new SqlParameter("@userMessageIds", JsonConvert.SerializeObject(userMessageIds))};
-
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlHelper.ExecuteNonQuery(
-                            connection,
-                            CommandType.StoredProcedure,
-                            "up_Remove_user_messages",
-                            param);
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                }
+                throw new ArgumentNullException(nameof(userMessageIds));
+            }
+            try
+            {
+                Execute(StoreProcedures.RemoveUserMessages, new { userMessageIds }, CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
             }
         }
 
         public void SendMessage(Message message, IEnumerable<Guid> userIds)
         {
-            using (var logger = new LogWrapper())
+            if (message == null)
             {
-                if (message == null)
+                throw new ArgumentNullException(nameof(message));
+            }
+            if (userIds == null)
+            {
+                throw new ArgumentNullException(nameof(userIds));
+            }
+            try
+            {
+                message.Id = Guid.NewGuid();
+                message.Date = DateTime.Now;
+                Execute(StoreProcedures.SendMessage, new
                 {
-                    logger.Error(ExceptionDescribed.MessageIsNull);
-                    return;
-                }
-                if (userIds == null)
-                {
-                    logger.Error(ExceptionDescribed.UserIdsIsNull);
-                    return;
-                }
-                try
-                {
-                    message.Id = Guid.NewGuid();
-                    message.Date = DateTime.Now;
-
-                    SqlParameter[] param =
-                    {
-                        new SqlParameter("@messageId", message.Id),
-                        new SqlParameter("@theme", message.Theme),
-                        new SqlParameter("@date", message.Date),
-                        new SqlParameter("@text", message.Text),
-                        new SqlParameter("@senderId", message.Sender.Id),
-                        new SqlParameter("@jsonIds", JsonConvert.SerializeObject(userIds))
-                    };
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlHelper.ExecuteNonQuery(
-                            connection, 
-                            CommandType.StoredProcedure, 
-                            "up_Send_new_Message",
-                            param);
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                }
+                    messageId = message.Id,
+                    theme = message.Theme,
+                    date = message.Date,
+                    text = message.Text,
+                    senderId = message.Sender.Id,
+                    jsonIds = JsonConvert.SerializeObject(userIds)
+                }, CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
             }
         }
 
         public void UpdateMessageRead(Guid userMessageId)
         {
-            using (var logger = new LogWrapper())
+            if (userMessageId == Guid.Empty)
             {
-                if (userMessageId == Guid.Empty)
-                {
-                    logger.Error(ExceptionDescribed.UserMessageIdIsNull);
-                    return;
-                }
-                try
-                {
-                    SqlParameter[] param = { new SqlParameter("@userMessageId", userMessageId) };
-
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlHelper.ExecuteNonQuery(
-                            connection,
-                            CommandType.StoredProcedure,
-                            "up_Update_read_in_message",
-                            param);
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                }
+                throw new ArgumentOutOfRangeException(nameof(userMessageId));
             }
+            try
+            {
+                Execute(StoreProcedures.UpdateStatusInMessage, new { userMessageId }, CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
+            }
+            
         }
 
         public void MoveUserMessage(int folderId, Guid userMessageId)
         {
-            using (var logger = new LogWrapper())
+            if (userMessageId == Guid.Empty)
             {
-                if (userMessageId == Guid.Empty)
-                {
-                    logger.Error(ExceptionDescribed.GuidIsEmpty);
-                    return;
-                }
-                if (folderId < 0)
-                {
-                    logger.Error(ExceptionDescribed.IdIsNegative);
-                    return;
-                }
-                try
-                {
-                    SqlParameter[] param =
-                    {
-                        new SqlParameter("@folderId", folderId),
-                        new SqlParameter("@userMessageId", userMessageId)
-                    };
-                    using (var connection = new SqlConnection(SqlHelper.GetConnectionString()))
-                    {
-                        SqlHelper.ExecuteNonQuery(
-                            connection,
-                            CommandType.StoredProcedure,
-                            "up_Move_user_message_in_folder",
-                            param);
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e.StackTrace);
-                }
+                throw new ArgumentOutOfRangeException(nameof(userMessageId));
+            }
+            if (folderId < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(folderId));
+            }
+            try
+            {
+                Execute(StoreProcedures.MoveUserMessageInFolder, new {folderId, userMessageId},
+                    CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.StackTrace);
             }
         }
     }

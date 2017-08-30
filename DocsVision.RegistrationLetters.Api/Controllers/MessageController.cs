@@ -10,22 +10,13 @@ using DocsVision.RegistrationLetters.Log;
 namespace DocsVision.RegistrationLetters.Api.Controllers
 {
     [RoutePrefix("api/message")]
-    public class MessageController : ApiController //: BaseApiController
+    public class MessageController : BaseApiController
     {
-        private readonly IMessageRepository MessageRepository;
-        private IUserRepository UserRepository;
-        private ModelFactory _modelFactory;
-        protected ModelFactory TheModelFactory => _modelFactory ?? (_modelFactory = new ModelFactory(Request));
-
-        public MessageController(IMessageRepository messageRepository)
+        // Нужен ли UserRepository???
+        public MessageController(IMessageRepository messageRepository, IUserRepository userRepository) :
+            base(messageRepository, userRepository)
         {
-            this.MessageRepository = messageRepository;
         }
-
-//        public MessageController(IMessageRepository messageRepository, IUserRepository userRepository) :
-//            base(messageRepository, userRepository)
-//        {
-//        }
 
         [HttpGet]
         [Route("{messageId:guid}", Name = "GetMessageById")]

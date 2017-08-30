@@ -1,7 +1,6 @@
 
 using DocsVision.RegistrationLetters.Api.Models;
 using DocsVision.RegistrationLetters.Api.Models.Validators;
-using DocsVision.RegistrationLetters.DataAccess.Sql.SQLHelper;
 using DocsVision.RegistrationLetters.Log;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DocsVision.RegistrationLetters.Api.App_Start.NinjectWebCommon), "Start")]
@@ -84,11 +83,9 @@ namespace DocsVision.RegistrationLetters.Api.App_Start
             var connectionString = ConfigurationManager.ConnectionStrings["MessageDb"].ConnectionString;
 
             /* DAL */
-            //kernel.Inject(new SqlHelper(connectionString));
             kernel.Bind<string>().ToConstant(connectionString);
             kernel.Bind<IUserRepository>().To<UserRepository>();
             kernel.Bind<IMessageRepository>().To<MessageRepository>();
-               
             kernel.Bind<IUserFolderRepository>().To<UserFolderRepository>();
 
             /* Validators */
