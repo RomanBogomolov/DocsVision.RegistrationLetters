@@ -15,9 +15,6 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
         {
         }
 
-        /* 
-         * Сделать!!! 
-         */
         public IEnumerable<string> GetInvalidUserEmails(string[] emails)
         {
             if (emails == null)
@@ -26,15 +23,8 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
             try
             {
-                DynamicParameters param = new DynamicParameters();
-                param.Add("@Emails", JsonConvert.SerializeObject(emails));
-                param.Add("@invalidEmails", dbType: DbType.String, direction: ParameterDirection.Output);
-
-                Execute("up_Check_user_emails", param, CommandType.StoredProcedure);
-
-                var unRegistredEmails = param.Get<string>("@invalidEmails");
-
-                return null;
+                string jsonEmails = JsonConvert.SerializeObject(emails);
+                return Query<string>("up_Check_user_emails", new { emails = jsonEmails }, CommandType.StoredProcedure);
             }
             catch (Exception e)
             {

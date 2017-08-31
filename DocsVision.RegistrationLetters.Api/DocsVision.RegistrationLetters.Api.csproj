@@ -129,7 +129,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Message\ErrorMessageDescribed.cs" />
+    <Compile Include="Message\LoggerMessageDescribed.cs" />
+    <Compile Include="Message\ModelStateErrorDescribed.cs" />
     <Compile Include="Models\CreateFolderInputModel.cs" />
     <Compile Include="Models\MessageEmailsInputModel.cs" />
     <Compile Include="Models\ModelFactory.cs" />

@@ -33,8 +33,8 @@ namespace DocsVision.RegistrationLetters.DataAccess
         /// Отправка сообщения пользователям
         /// </summary>
         /// <param name="message">Id сообщения</param>
-        /// <param name="userIds">Id пользователей</param>
-        void SendMessage(Message message, IEnumerable<Guid> userIds);
+        /// <param name="emails">Email-ы пользователей</param>
+        void SendMessage(Message message, IEnumerable<string> emails);
         /// <summary>
         /// Пользователь прочитал сообщение
         /// </summary>

@@ -8,7 +8,6 @@ namespace DocsVision.RegistrationLetters.Api.Models
     /// </summary>
     public class UserMessagesInputModel
     {
-        public Guid UserId { get; set; }
         public IEnumerable<Guid> MessageIds { get; set; }
     }
 }

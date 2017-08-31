@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DocsVision.RegistrationLetters.Api.Models;
 using DocsVision.RegistrationLetters.DataAccess;
+using DocsVision.RegistrationLetters.Log;
 
 namespace DocsVision.RegistrationLetters.Api.Controllers
 {
@@ -16,11 +17,19 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
 
         protected readonly IMessageRepository MessageRepository;
         protected readonly IUserRepository UserRepository;
+        protected readonly ILogger Logger;
+        protected readonly IUserFolderRepository UserFolder;
 
-        public BaseApiController(IMessageRepository messageRepository, IUserRepository userRepository)
+        public BaseApiController(IMessageRepository messageRepository, IUserRepository userRepository, ILogger logger)
         {
             MessageRepository = messageRepository;
             UserRepository = userRepository;
+            Logger = logger;
+        }
+
+        public BaseApiController(IUserFolderRepository userFolder)
+        {
+            UserFolder = userFolder;
         }
     }
 }

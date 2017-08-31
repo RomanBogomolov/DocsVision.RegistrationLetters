@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using Dapper;
 using DocsVision.RegistrationLetters.Log;
 
@@ -35,15 +36,6 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
                 return connection.Query<T>(sql, parameters, commandType: type).ToList();
             }
         }
-        
-        protected IEnumerable<TResult> Query<TFirst, TSecond, TResult>(string sql, Func<TFirst, TSecond, TResult> func = null, object parameters = null, CommandType? type = null)
-        {
-            using (var connection = CreateConnection())
-            {
-                connection.Open();
-                return connection.Query(sql, func, parameters, commandType: type);
-            }
-        }
 
         protected int Execute(string sql, object parameters = null, CommandType? type = null)
         {
@@ -53,15 +45,35 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
                 return connection.Execute(sql, parameters, commandType: type);
             }
         }
+        
+        protected IEnumerable<TParent> OneToOneTableQuery<TParent, TChild>(
+            string sql, 
+            Func<TParent, TChild> key,
+            object param = null, 
+            string splitOn = "Id", 
+            CommandType? type = null,
+            string splitTableName = ""
+            )
+        {
+            using (var connection = CreateConnection())
+            {
+                var data = connection.Query<TParent, TChild, TParent>(sql, (p, c) =>
+                {
+                    PropertyInfo propertyInfo = p.GetType().GetProperty(splitTableName) ??
+                                                p.GetType().GetProperty(typeof(TChild).Name);
+                    if (propertyInfo != null)
+                        propertyInfo.SetValue(p, c);
+                    return p;
+                }, param, splitOn: splitOn, commandType: type);
 
-
-        /*
-         * Подумать!!!
-         */
-        protected IEnumerable<TParent> MultipleTablesQuery<TParent, TChild, TParentKey>(
+                return data;
+            }
+        }
+        
+        protected IEnumerable<TParent> OneToManyTablesQuery<TParent, TChild, TParentKey>(
             string sql,
             Func<TParent, TParentKey> parentKeySelector, 
-            Func<TParent, TChild> childSelector, 
+            Func<TParent, IList<TChild>> childSelector, 
             object param = null, 
             string splitOn = "Id",
             CommandType? commandType = null)
@@ -75,15 +87,12 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
                 connection.Query<TParent, TChild, TParent>(sql, (parent, child) =>
                 {
                     if (!cache.ContainsKey(parentKeySelector(parent)))
-                    {
                         cache.Add(parentKeySelector(parent), parent);
-                    }
+
                     TParent cachedParent = cache[parentKeySelector(parent)];
-                    //TChild children = child;
-                    child = childSelector(cachedParent);
-
+                    IList<TChild> children = childSelector(cachedParent);
+                    children.Add(child);
                     return cachedParent;
-
                 }, param, splitOn: splitOn, commandType: commandType);
 
                 return cache.Values;

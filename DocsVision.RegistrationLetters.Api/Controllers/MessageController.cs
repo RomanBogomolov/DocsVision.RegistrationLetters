@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 using DocsVision.RegistrationLetters.Api.Message;
@@ -12,9 +12,8 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
     [RoutePrefix("api/message")]
     public class MessageController : BaseApiController
     {
-        // Нужен ли UserRepository???
-        public MessageController(IMessageRepository messageRepository, IUserRepository userRepository) :
-            base(messageRepository, userRepository)
+        public MessageController(IMessageRepository messageRepository, IUserRepository userRepository, ILogger logger) :
+            base(messageRepository, userRepository, logger)
         {
         }
 
@@ -23,19 +22,26 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
         public IHttpActionResult GetMessageById(Guid messageId)
         {
             var messageInfo = MessageRepository.FindMessageById(messageId);
-            return Ok(TheModelFactory.Create(messageInfo));
+
+            if (messageInfo != null)
+                return Ok(TheModelFactory.Create(messageInfo));
+
+            Logger.Warn(LoggerMessageDescribed.MessageIsAvailable(messageId));
+            return BadRequest(ModelStateErrorDescribed.InvalidMessage(ModelState));
         }
 
         [HttpGet]
         [Route("user/{userId:guid}/folder/{folderId:int}")]
         public IHttpActionResult GetUserMessagesInFolder(Guid userId, int folderId)
         {
-//            var user = UserRepository.FindById(userId);
-//            if (user == null)
-//            {
-//                Logger.ServiceLog.Warn(ErrorMessageDescribed.UserIsAvailable(userId));
-//                return BadRequest();
-//            }
+            var user = UserRepository.FindById(userId);
+
+            if (user == null)
+            {
+                Logger.Warn(LoggerMessageDescribed.UserIsAvailable(userId));
+                return BadRequest(ModelStateErrorDescribed.InvalidMessage(ModelState));
+            }
+
             var userMessages = MessageRepository.GetMessagesInFolder(folderId, userId);
             return Ok(TheModelFactory.Create(userMessages));
         }
@@ -44,63 +50,49 @@ namespace DocsVision.RegistrationLetters.Api.Controllers
         [Route("send")]
         public IHttpActionResult SendMessageToUsers(MessageEmailsInputModel model)
         {
-            IList<Guid> userIds = new List<Guid>();
+            var invalidEmails = UserRepository.GetInvalidUserEmails(model.Emails);
+            var enumerable = invalidEmails as string[] ?? invalidEmails.ToArray();
+            if (enumerable.Any())
+            {
+                Logger.Warn(LoggerMessageDescribed.UserSendMessageError(model.Message.Sender.Id, enumerable));
+                return BadRequest(ModelStateErrorDescribed.InvalidEmails(ModelState, enumerable));
+            }
 
-            /* 
-             * Лучше передать сразу массив
-             */
-//            foreach (var email in model.Emails)
-//            {
-//                var user = UserRepository.FindByEmail(email);
-//
-//                if (user == null)
-//                {
-//                    Logger.ServiceLog.Warn($"Пользователь {email} не зарегистрирован");
-//                    return BadRequest($"Пользователь {email} не зарегистрирован");
-//                }
-//
-//                userIds.Add(user.Id);
-//            }
-            var result = UserRepository.GetInvalidUserEmails(model.Emails);
-
-            MessageRepository.SendMessage(model.Message, userIds);
-            Logger.ServiceLog.Info(
-                $"Пользователь {model.Message.Sender.Id} успешно отправил сообщения на {String.Join(",", model.Emails)}");
-
+            MessageRepository.SendMessage(model.Message, model.Emails);
+            Logger.Info(LoggerMessageDescribed.UserSendMessage(model.Message.Sender.Id, enumerable));
             return Ok();
         }
 
+        [HttpPut]
+        [Route("{userMessageId:Guid}/move/{folderId:int}")]
+        public IHttpActionResult MoveMessage(Guid userMessageId, int folderId)
+        {
+            MessageRepository.MoveUserMessage(folderId, userMessageId);
+            return Ok();
+        }
+        
+        [HttpPut]
+        [Route("bucket")]
+        public IHttpActionResult AddToBucket(UserMessagesInputModel model)
+        {
+            MessageRepository.RemoveMessages(model.MessageIds);
+            return Ok();
+        }
+        
         [HttpDelete]
         [Route("delete")]
         public IHttpActionResult DeleteMessages(UserMessagesInputModel model)
         {
-            var user = UserRepository.FindById(model.UserId);
-
-            if (user == null)
-            {
-                Logger.ServiceLog.Warn($"Пользователь с {model.UserId} недоступен");
-                return BadRequest("Пользователь недоступен");
-            }
-
-            /* 
-             * Лучше передать сразу массив
-             */
-            foreach (var messageId in model.MessageIds)
-            {
-                var message = MessageRepository.FindMessageById(messageId);
-
-                if (message == null)
-                {
-                    Logger.ServiceLog.Warn(
-                        $"Не удалось загрузить сообщение {messageId} для пользователя {model.UserId}");
-                    return BadRequest($"Не удалось загрузить сообщение {messageId}");
-                }
-            }
-
-            //MessageRepository.DeleteMessages(obj.UserId, obj.MessageIds);
-            Logger.ServiceLog.Info(
-                $"Пользователь {model.UserId} успешно удалил сообщения {String.Join(",", model.MessageIds)}");
+            MessageRepository.DeleteMessages(model.MessageIds);
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        [Route("reading/{userMessageId:Guid}")]
+        public IHttpActionResult UpdateRead(Guid userMessageId)
+        {
+            MessageRepository.UpdateMessageRead(userMessageId);
+            return Ok();
         }
     }
 }

@@ -23,9 +23,8 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
             try
             {
-//                return QueryFirstOrDefault<Message>(SqlStrings.SelectMessageById, new { id = messageId });
-                return MultipleTablesQuery<Message, User, Guid>(StoreProcedures.SelectMessageByid, m => m.Id, u => u.Sender,
-                    new { id = messageId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return OneToOneTableQuery<Message, User>(StoreProcedures.SelectMessageByid, u => u.Sender,
+                    new {id = messageId}, type: CommandType.StoredProcedure, splitTableName: "Sender").FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -34,6 +33,7 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
         }
         
+        /* Подумать! Id из [dbo].[UserMessage] */
         public IEnumerable<Message> GetMessagesInFolder(int folderId, Guid userId)
         {
             if (folderId < 0)
@@ -46,20 +46,8 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
             try
             {
-                var lookup = new Dictionary<Guid, Message>();
-                Query<Message, User, Message>(StoreProcedures.GetUserMessagesInFolder, (m, u) =>
-                {
-                    Message mess;
-                    if (!lookup.TryGetValue(m.Id, out mess))
-                        lookup.Add(m.Id, mess = m);
-                    if (mess.Sender == null)
-                        mess.Sender = new User();
-                    mess.Sender = u;
-                    return mess;
-                }, new { folderId, userId }, CommandType.StoredProcedure);
-
-                var messages = lookup.Values.ToList();
-                return messages;
+                return OneToOneTableQuery<Message, User>(StoreProcedures.GetUserMessagesInFolder, u => u.Sender,
+                    new {folderId, userId}, type: CommandType.StoredProcedure, splitTableName: "Sender");
             }
             catch (Exception e)
             {
@@ -76,7 +64,8 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
             try
             {
-                Execute(StoreProcedures.DeleteUserMessages, new {userMessageIds}, CommandType.StoredProcedure);
+                string jsonUserMessageIds = JsonConvert.SerializeObject(userMessageIds.Select(g => g.ToString()));
+                Execute(StoreProcedures.DeleteUserMessages, new { userMessageIds = jsonUserMessageIds }, CommandType.StoredProcedure);
             }
             catch (Exception e)
             {
@@ -92,7 +81,8 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
             try
             {
-                Execute(StoreProcedures.RemoveUserMessages, new { userMessageIds }, CommandType.StoredProcedure);
+                string jsonUserMessageIds = JsonConvert.SerializeObject(userMessageIds.Select(g => g.ToString()));
+                Execute(StoreProcedures.RemoveUserMessages, new { userMessageIds = jsonUserMessageIds }, CommandType.StoredProcedure);
             }
             catch (Exception e)
             {
@@ -100,15 +90,15 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
             }
         }
 
-        public void SendMessage(Message message, IEnumerable<Guid> userIds)
+        public void SendMessage(Message message, IEnumerable<string> emails)
         {
             if (message == null)
             {
                 throw new ArgumentNullException(nameof(message));
             }
-            if (userIds == null)
+            if (emails == null)
             {
-                throw new ArgumentNullException(nameof(userIds));
+                throw new ArgumentNullException(nameof(emails));
             }
             try
             {
@@ -121,7 +111,7 @@ namespace DocsVision.RegistrationLetters.DataAccess.Sql
                     date = message.Date,
                     text = message.Text,
                     senderId = message.Sender.Id,
-                    jsonIds = JsonConvert.SerializeObject(userIds)
+                    jsonEmails = JsonConvert.SerializeObject(emails)
                 }, CommandType.StoredProcedure);
             }
             catch (Exception e)

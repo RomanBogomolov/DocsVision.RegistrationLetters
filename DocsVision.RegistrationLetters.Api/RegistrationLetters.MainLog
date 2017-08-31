@@ -8,3 +8,20 @@
    at DocsVision.RegistrationLetters.DataAccess.Sql.BaseRepository.Query[TFirst,TSecond,TResult](String sql, Func`3 func, Object parameters, Nullable`1 type) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\BaseRepository.cs:line 44
    at DocsVision.RegistrationLetters.DataAccess.Sql.BaseRepository.MultipleTablesQuery[TParent,TChild,TParentKey](String sql, Func`2 parentKeySelector, Func`2 childSelector, Object param, String splitOn, Nullable`1 commandType) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\BaseRepository.cs:line 65
    at DocsVision.RegistrationLetters.DataAccess.Sql.MessageRepository.FindMessageById(Guid messageId) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\MessageRepository.cs:line 27
+2017-08-31 14:56:59.1875|WARN|MessageController.cs|Пользователь 95f77d27-a9b2-4ce0-870b-3ec1f6058733 ввел невалидные email-ы System.Collections.Generic.List`1[System.String]
+2017-08-31 14:59:06.2531|WARN|MessageController.cs|Пользователь 95f77d27-a9b2-4ce0-870b-3ec1f6058733 ввел невалидные email-ы test10@gmail.com
+2017-08-31 16:27:53.0624|WARN|MessageController.cs|Пользователь 95f77d27-a9b2-4ce0-870b-3ec1f6058733 ввел невалидные email-ы: test10@gmail.com
+2017-08-31 16:59:07.5350|ERROR|MessageRepository.cs|   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at Dapper.SqlMapper.ExecuteCommand(IDbConnection cnn, CommandDefinition& command, Action`2 paramReader)
+   at Dapper.SqlMapper.ExecuteImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.Execute(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at DocsVision.RegistrationLetters.DataAccess.Sql.BaseRepository.Execute(String sql, Object parameters, Nullable`1 type) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\BaseRepository.cs:line 45
+   at DocsVision.RegistrationLetters.DataAccess.Sql.MessageRepository.DeleteMessages(IEnumerable`1 userMessageIds) in F:\Projects\DocsVision.RegistrationLetters\DocsVision.RegistrationLetters.DataAccess.Sql\MessageRepository.cs:line 66
